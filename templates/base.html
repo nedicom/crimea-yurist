@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Мой сайт{% endblock %}</title>
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <nav>
+        <a href="{% url 'home' %}">Главная</a>
+        <a href="{% url 'home' %}">Услуги</a>        
+        <a href="{% url 'home' %}">О нас</a>
+        <a href="{% url 'home' %}">Цены</a>
+        <a href="{% url 'home' %}">Отзывы</a>
+        <a href="{% url 'home' %}">Практика</a>
+        <a href="{% url 'home' %}">Контакты</a>
+        <!-- другие ссылки -->
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Мой сайт</p>
+    </footer>
+</body>
+
+</html>
