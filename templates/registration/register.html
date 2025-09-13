@@ -1,0 +1,26 @@
+<!-- templates/registration/register.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация</title>
+</head>
+<body>
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend>Регистрация</legend>
+                {{ form.as_p }}
+            </fieldset>
+            <div class="form-group">
+                <button type="submit">Зарегистрироваться</button>
+            </div>
+        </form>
+        <div>
+            <small>
+                Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a>
+            </small>
+        </div>
+    </div>
+</body>
+</html>

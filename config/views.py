@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import login
+from .forms import UserRegisterForm
 
 def home_page(request):
     context = {
@@ -14,3 +17,16 @@ def home_page(request):
         'email': 'info@crimea-yurist.ru'
     }
     return render(request, 'home.html', context)
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Автоматический вход после регистрации
+            messages.success(request, 'Регистрация прошла успешно!')
+            return redirect('home')  # Замените 'home' на имя вашего URL
+    else:
+        form = UserRegisterForm()
+    
+    return render(request, 'registration/register.html', {'form': form})
