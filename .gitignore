@@ -1,0 +1,5 @@
+cgi-bin/
+myenv/
+myproject/__pycache__
+.htaccess
+db.sqlite3
