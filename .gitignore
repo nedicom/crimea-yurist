@@ -1,5 +1,9 @@
 cgi-bin/
 myenv/
 myproject/__pycache__
+search/__pycache__
+myproject/settings/__pycache__
+home/migrations/__pycache__
+home/__pycache__ 
 .htaccess
 db.sqlite3
