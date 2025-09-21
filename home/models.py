@@ -16,6 +16,8 @@ class HomePage(Page):
         ('image', ImageChooserBlock(icon="image", verbose_name="Картинка")),
     ], use_json_field=True, blank=True)
 
+    template = "home_page.html"
+
     content_panels = Page.content_panels + [
         FieldPanel('content'),
     ]
