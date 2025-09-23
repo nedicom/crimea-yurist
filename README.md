@@ -1,7 +1,7 @@
 lawyer's site
 
 My python project
-Python + front (html, js, css)
+Python 3.7.0 + front (html, js, css)
 
 1. git clone https://github.com/nedicom/crimea-yurist .
 2. db: create/download db.sqlite3 or connect another
