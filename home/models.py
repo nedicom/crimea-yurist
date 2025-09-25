@@ -24,7 +24,7 @@ class HomePage(Page):
         ('paragraph', blocks.RichTextBlock(icon="pilcrow", verbose_name="Текст")),
         ('image', ImageChooserBlock(icon="image", verbose_name="Картинка")),
         ('cities_gallery', blocks.ListBlock(
-            blocks.PageChooserBlock(page_type='city.CityPage'),
+            blocks.PageChooserBlock(),
             icon='group',
             verbose_name='Галерея городов'
         )),
