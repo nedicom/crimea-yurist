@@ -109,28 +109,32 @@
 
 
     <!-- Yandex.Metrika counter -->
-    <script defer>
-        // Загрузка метрики только после полной загрузки страницы
-        window.addEventListener('load', function () {
-            setTimeout(function () {
-                var script = document.createElement('script');
-                script.src = 'https://mc.yandex.ru/metrika/tag.js?id=104280599';
-                script.async = true;
+    <script>
+        function loadMetrica() {
+            // Удаляем обработчики чтобы не загружать повторно
+            document.removeEventListener('click', loadMetrica);
+            document.removeEventListener('scroll', loadMetrica);
+            document.removeEventListener('mousemove', loadMetrica);
 
-                var firstScript = document.getElementsByTagName('script')[0];
-                firstScript.parentNode.insertBefore(script, firstScript);
+            var script = document.createElement('script');
+            script.src = 'https://mc.yandex.ru/metrika/tag.js?id=104280599';
+            script.async = true;
+            document.head.appendChild(script);
 
-                // Упрощенная инициализация
-                window.ym = window.ym || function () { (ym.a = ym.a || []).push(arguments); };
-                ym.l = +new Date;
-                ym(104280599, 'init', {
-                    accurateTrackBounce: true,
-                    trackLinks: true
-                });
-            }, 1000); // Задержка 1 секунда после load
-        });
+            window.ym = window.ym || function () { (ym.a = ym.a || []).push(arguments); };
+            ym.l = +new Date;
+            ym(104280599, 'init', { accurateTrackBounce: true, trackLinks: true });
+        }
+
+        // Загружаем при любом взаимодействии
+        document.addEventListener('click', loadMetrica, { once: true });
+        document.addEventListener('scroll', loadMetrica, { once: true });
+        document.addEventListener('mousemove', loadMetrica, { once: true });
+
+        // Страховка на случай если пользователь не взаимодействует
+        setTimeout(loadMetrica, 2000); // Через 2 секунд
     </script>
-    </script>
+
     <noscript>
         <div><img src="https://mc.yandex.ru/watch/104280599" style="position:absolute;left:-9999px" alt=""></div>
     </noscript>
