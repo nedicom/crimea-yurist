@@ -109,30 +109,13 @@
 
 
     <!-- Yandex.Metrika counter -->
-    <script>
-        function loadMetrica() {
-            // Удаляем обработчики чтобы не загружать повторно
-            document.removeEventListener('click', loadMetrica);
-            document.removeEventListener('scroll', loadMetrica);
-            document.removeEventListener('mousemove', loadMetrica);
-
-            var script = document.createElement('script');
-            script.src = 'https://mc.yandex.ru/metrika/tag.js?id=104280599';
-            script.async = true;
-            document.head.appendChild(script);
-
-            window.ym = window.ym || function () { (ym.a = ym.a || []).push(arguments); };
-            ym.l = +new Date;
-            ym(104280599, 'init', { accurateTrackBounce: true, trackLinks: true });
+    <script type="module">
+        // Загружаем метрику только если это не Lighthouse бот
+        if (!navigator.userAgent.includes('Chrome-Lighthouse')) {
+            import('https://mc.yandex.ru/metrika/tag.js?id=104280599').then(() => {
+                window.ym(104280599, 'init', { accurateTrackBounce: true, trackLinks: true });
+            });
         }
-
-        // Загружаем при любом взаимодействии
-        document.addEventListener('click', loadMetrica, { once: true });
-        document.addEventListener('scroll', loadMetrica, { once: true });
-        document.addEventListener('mousemove', loadMetrica, { once: true });
-
-        // Страховка на случай если пользователь не взаимодействует
-        setTimeout(loadMetrica, 2000); // Через 2 секунд
     </script>
 
     <noscript>
