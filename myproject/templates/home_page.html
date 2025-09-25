@@ -35,8 +35,6 @@
             font-weight: normal;
         }
     </style>
-
-    <script defer src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
@@ -118,9 +116,21 @@
             document.body.appendChild(script);
         }, 10000); // 10 секунд
     </script>
-    <noscript>
-        <div><img src="https://mc.yandex.ru/watch/104280599" style="position:absolute;left:-9999px" alt=""></div>
-    </noscript>
+
+    <!-- Загружайте с задержкой как и метрику -->
+    <script>
+        setTimeout(function () {
+            var script = document.createElement('script');
+            script.src = "https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.13/dist/index.global.js";
+            script.async = true;
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                // Инициализируйте только нужные функции
+                tailwind.init({ darkMode: false });
+            };
+        }, 3000);
+    </script>
     <!-- /Yandex.Metrika counter -->
 </body>
 
