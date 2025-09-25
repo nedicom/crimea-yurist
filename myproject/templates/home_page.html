@@ -109,15 +109,15 @@
 
 
     <!-- Yandex.Metrika counter -->
-    <script type="module">
-        // Загружаем метрику только если это не Lighthouse бот
-        if (!navigator.userAgent.includes('Chrome-Lighthouse')) {
-            import('https://mc.yandex.ru/metrika/tag.js?id=104280599').then(() => {
-                window.ym(104280599, 'init', { accurateTrackBounce: true, trackLinks: true });
-            });
-        }
+    <script>
+        // Загрузка метрики с задержкой
+        setTimeout(function () {
+            var script = document.createElement('script');
+            script.src = "{% static 'js/metrika.js' %}";
+            script.async = true;
+            document.body.appendChild(script);
+        }, 10000); // 10 секунд
     </script>
-
     <noscript>
         <div><img src="https://mc.yandex.ru/watch/104280599" style="position:absolute;left:-9999px" alt=""></div>
     </noscript>
