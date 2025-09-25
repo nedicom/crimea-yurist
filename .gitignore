@@ -1,9 +1,48 @@
-cgi-bin/
+# Virtual environment
 myenv/
-myproject/__pycache__
-search/__pycache__
-myproject/settings/__pycache__
-home/migrations/__pycache__
-home/__pycache__ 
-.htaccess
+venv/
+env/
+
+# Database
 db.sqlite3
+*.db
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+shtools/
+var/
+wheels/
+*.egg-info/
+.installed.cgi
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment variables
+.env
+.venv
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Apache
+.htaccess
+cgi-bin/
