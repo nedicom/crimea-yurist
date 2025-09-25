@@ -27,13 +27,13 @@
     {% endblock %}
 
     <style>
-    /* Критические стили для текста */
-    body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.4;
-    font-weight: normal;
-    }
+        /* Критические стили для текста */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.4;
+            font-weight: normal;
+        }
     </style>
 
     <script defer src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -110,13 +110,26 @@
 
     <!-- Yandex.Metrika counter -->
     <script defer>
-        (function (m, e, t, r, i, k, a) {
-            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
-            m[i].l = 1 * new Date();
-            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104280599', 'ym');
+        // Загрузка метрики только после полной загрузки страницы
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                var script = document.createElement('script');
+                script.src = 'https://mc.yandex.ru/metrika/tag.js?id=104280599';
+                script.async = true;
 
-        ym(104280599, 'init', { webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+                var firstScript = document.getElementsByTagName('script')[0];
+                firstScript.parentNode.insertBefore(script, firstScript);
+
+                // Упрощенная инициализация
+                window.ym = window.ym || function () { (ym.a = ym.a || []).push(arguments); };
+                ym.l = +new Date;
+                ym(104280599, 'init', {
+                    accurateTrackBounce: true,
+                    trackLinks: true
+                });
+            }, 1000); // Задержка 1 секунда после load
+        });
+    </script>
     </script>
     <noscript>
         <div><img src="https://mc.yandex.ru/watch/104280599" style="position:absolute;left:-9999px" alt=""></div>
