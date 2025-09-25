@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block schema_org %}
+<script type="application/ld+json">
+{{ page.get_schema_org|safe }}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Ваш контент страницы города -->
+{% endblock %}
+
+{% block extra_schema_org %}
+{% for service in services %}
+{{ service.specific.get_schema_org|safe }}{% if not forloop.last %},{% endif %}
+{% endfor %}
+{% endblock %}
