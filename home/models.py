@@ -21,3 +21,20 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('content'),
     ]
+
+# Страница блога
+class BlogPage(Page):
+    content = StreamField([
+        ('heading', blocks.CharBlock(form_classname="title", icon="title", verbose_name="Заголовок")),
+        ('paragraph', blocks.RichTextBlock(icon="pilcrow", verbose_name="Текст")),
+        # Теперь ImageChooserBlock импортирован правильно
+        ('image', ImageChooserBlock(icon="image", verbose_name="Картинка")),
+    ], use_json_field=True, blank=True)
+
+    
+    content_panels = Page.content_panels + [
+        FieldPanel('content'),
+    ]
+    
+    # Шаблон для страниц блога
+    template = "blog_page.html"
