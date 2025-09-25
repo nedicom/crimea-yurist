@@ -32,18 +32,16 @@
     </style>
 </head>
 
-<body class="{% block body_class %}{% endblock %} min-h-full flex flex-col">
+<body class="{% block body_class %}{% endblock %}">
     {% wagtailuserbar %}
 
     {# Header #}
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light p-5">
-            <div class="container">
                 <a class="navbar-brand" href="/">
                     {{ settings.core.SiteSettings.site_name }}
                 </a>
                 {% include "includes/navigation.html" %}
-            </div>
         </nav>
     </header>
 
