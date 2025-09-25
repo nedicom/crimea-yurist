@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-3xl font-bold hover:underline">
+        {{ page.title }}
+    </h1>
+
+    {# Вывод StreamField контента #}
+    {% if page.content %}
+    <div class="stream-content">
+        {% for block in page.content %}
+        <section class="block-{{ block.block_type }}">
+            {% if block.block_type == 'heading' %}
+            <h2>{{ block.value }}</h2>
+            {% elif block.block_type == 'paragraph' %}
+            <div class="paragraph">
+                {{ block.value|richtext }}
+            </div>
+            {% elif block.block_type == 'image' %}
+            <div class="image">
+                {% image block.value width-800 %}
+            </div>
+            {% endif %}
+        </section>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

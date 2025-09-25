@@ -1,7 +1,7 @@
 {% load static wagtailcore_tags wagtailimages_tags wagtailuserbar %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 
 <head>
     <meta charset="utf-8" />
@@ -23,20 +23,21 @@
     {% endif %}
 
     {# Global stylesheets #}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/myproject.css' %}">
+    {# <link rel="stylesheet" type="text/css" href="{% static 'css/myproject.css' %}"> #}
 
     {% block extra_css %}
     {# Override this in templates to add extra stylesheets #}
     {% endblock %}
     <script defer src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    </style>
 </head>
 
-<body class="{% block body_class %}{% endblock %}">
+<body class="{% block body_class %}{% endblock %} min-h-full flex flex-col mx-10">
     {% wagtailuserbar %}
 
     {# Header #}
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light p-5">
             <div class="container">
                 <a class="navbar-brand" href="/">
                     {{ settings.core.SiteSettings.site_name }}
@@ -47,8 +48,19 @@
     </header>
 
     {# Main content #}
-    <main class="container mt-4">
-        {% block content %}{% endblock %}
+    <main class="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-grow">
+        <!-- Основной контент -->
+        <main class="lg:col-span-3">
+            <div>{% block content %}{% endblock %}</div>
+        </main>
+
+        <!-- Сайдбар (только на больших экранах) -->
+        <aside class="lg:col-span-1">
+            <div class="bg-gray-100 p-4 rounded-lg">
+                <h3>Сайдбар</h3>
+                <p>На мобильных будет под контентом</p>
+            </div>
+        </aside>
     </main>
 
     {# Footer #}
