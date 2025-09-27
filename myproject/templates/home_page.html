@@ -25,7 +25,7 @@
     {% block extra_css %}
     {# Override this in templates to add extra stylesheets #}
     {% endblock %}
-
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
     <style>
         /* Критические стили для текста */
         body {
@@ -115,21 +115,6 @@
             script.async = true;
             document.body.appendChild(script);
         }, 10000); // 10 секунд
-    </script>
-
-    <!-- Загружайте с задержкой как и метрику -->
-    <script>
-        setTimeout(function () {
-            var script = document.createElement('script');
-            script.src = "https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.13/dist/index.global.js";
-            script.async = true;
-            document.body.appendChild(script);
-
-            script.onload = function () {
-                // Инициализируйте только нужные функции
-                tailwind.init({ darkMode: false });
-            };
-        }, 3000);
     </script>
     <!-- /Yandex.Metrika counter -->
 </body>
