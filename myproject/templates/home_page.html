@@ -26,15 +26,6 @@
     {# Override this in templates to add extra stylesheets #}
     {% endblock %}
     <link href="{% static 'css/output.css' %}" rel="stylesheet">
-    <style>
-        /* Критические стили для текста */
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            line-height: 1.4;
-            font-weight: normal;
-        }
-    </style>
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
@@ -59,7 +50,7 @@
             <h1 class="text-3xl font-bold hover:underline">
                 {{ page.title }}
             </h1>
-
+<div class="bg-green-500 p-4 TEST123 text-4xl">Test</div>
             {# Вывод StreamField контента #}
             {% if page.content %}
             <div class="stream-content">
