@@ -43,6 +43,18 @@
         </nav>
     </header>
 
+    {# Banner #}
+    {% include "includes/frontbanner.html" %}
+
+    {# prices #}
+    {% include "includes/prices.html" %}
+
+    {# prices #}
+    {% include "includes/tableprices.html" %}
+
+    {# description #}
+    {% include "includes/description.html" %}
+
     {# Main content #}
     <main class="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-grow">
         <!-- Основной контент -->
@@ -50,7 +62,7 @@
             <h1 class="text-3xl font-bold hover:underline">
                 {{ page.title }}
             </h1>
-<div class="bg-green-500 p-4 TEST123 text-4xl">Test</div>
+            <div class="bg-green-500 p-4 text-4xl">Test</div>
             {# Вывод StreamField контента #}
             {% if page.content %}
             <div class="stream-content">
@@ -75,6 +87,7 @@
     </main>
 
     {# Footer #}
+
     <footer class="bg-dark text-light mt-5 py-4">
         <nav class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6">
             {% for page in menu_pages %}
@@ -85,7 +98,7 @@
             {% endfor %}
         </nav>
         <div class="container">
-            <p>&copy; 2024 {{ settings.core.SiteSettings.site_name }}</p>
+            <p>&copy; 2025 {{ settings.core.SiteSettings.site_name }}</p>
         </div>
     </footer>
 
