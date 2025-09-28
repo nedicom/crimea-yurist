@@ -9,3 +9,11 @@ Python 3.7.0 + front (html, js, css)
 4. activate virtual environment: myenv\Scripts\activate or source myenv/bin/activate
 5. install framework and CMS: pip install django==3.2.25 && pip install wagtail==4.1.4
 6. python manage.py runserver
+
+options:
+# tailwindcss install
+curl -LO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-windows-x64.exe
+move tailwindcss-windows-x64.exe tailwindcss.exe
+.\tailwindcss.exe init
+# tailwindcss usage
+.\tailwindcss.exe --input .\myproject\src\style.css --output .\myproject\static\css\output.css --watch --content "./myproject/templates/**/*.html"
