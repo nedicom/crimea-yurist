@@ -1,0 +1,25 @@
+{% load wagtailcore_tags %}
+
+<div class="bg-white rounded-2xl p-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for item in pages_with_children %}
+        <div class="space-y-2">
+            <!-- Родитель -->
+            <a href="{{ item.parent.url }}" 
+               class="block p-4 text-lg font-bold text-gray-900 hover:text-blue-600 hover:bg-blue-50 rounded-lg border-2 border-transparent hover:border-blue-200 transition-all duration-200">
+                {{ item.parent.title }}
+            </a>
+            
+            <!-- Дети -->
+            {% if item.children %}
+                {% for child in item.children %}
+                <a href="{{ child.url }}" 
+                   class="block py-2 px-4 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded transition-colors duration-200 text-sm{% if request.path == child.url %} text-blue-600 bg-blue-50 font-medium{% endif %}">
+                    {{ child.title }}
+                </a>
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>

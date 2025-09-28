@@ -5,67 +5,79 @@
             <div class="text-white space-y-6">
                 <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
                     <i class="fas fa-gavel text-yellow-400"></i>
-                    <span class="text-sm font-medium">Профессиональные юристы</span>
+                    <span class="text-sm font-medium">Профессиональные юристы в Крыму</span>
                 </div>
-                
+
+                <!-- SEO-заголовок -->
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                    Решим вашу правовую 
-                    <span class="text-yellow-400">проблему</span> 
-                    быстро и эффективно
+                    {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+                    <span class="text-yellow-400">для физических лиц и бизнеса</span>
                 </h1>
-                
+
+                <!-- SEO-описание -->
                 <p class="text-xl text-blue-100 leading-relaxed">
-                    Более 15 лет успешной практики. 95% выигранных дел. 
-                    Бесплатная первичная консультация.
+                    {% if page.search_description %}
+                    {{ page.search_description }}
+                    {% else %}
+                    Юридическая компания в Крыму с 2014 года. Услуги адвоката по гражданским,
+                    арбитражным и уголовным делам. Бесплатная консультация юриста в Симферополе,
+                    Севастополе, Ялте и других городах Крыма.
+                    {% endif %}
                 </p>
-                
+
                 <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <a href="/prices/" 
-                       class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 text-center">
-                        <i class="fas fa-tag mr-2"></i>
-                        Узнать цены
+                    <a href="/uslugi-yurista-krym/"
+                        class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 text-center">
+                        <i class="fas fa-scale-balanced mr-2"></i>
+                        Услуги юриста в Крыму
                     </a>
-                    
-                    <a href="#consultation" 
-                       class="bg-transparent border-2 border-white hover:bg-white/10 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 text-center">
-                        <i class="fas fa-comment-dots mr-2"></i>
-                        Опишите вашу ситуацию
+
+                    <a href="#consultation"
+                        class="bg-transparent border-2 border-white hover:bg-white/10 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 text-center">
+                        <i class="fas fa-phone mr-2"></i>
+                        Бесплатная консультация
                     </a>
                 </div>
-                
-                <div class="flex items-center gap-6 pt-6 text-blue-200">
+
+                <!-- SEO-ключевые преимущества -->
+                <div class="flex flex-wrap items-center gap-6 pt-6 text-blue-200">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-check-circle text-green-400"></i>
-                        <span>Конфиденциально</span>
+                        <span>Цены</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <i class="fas fa-check-circle text-green-400"></i>
-                        <span>Результат гарантирован</span>
+                        <span>Адрес</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <span>Отзывы</span>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Блок с фото юриста -->
             <div class="relative">
                 <div class="relative z-10 lawyer-shadow rounded-2xl overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                         alt="Профессиональный юрист" 
-                         class="w-full h-96 object-cover">
+                    <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Профессиональный юрист в Крыму - юридические услуги в Симферополе, Севастополе, Ялте"
+                        class="w-full h-96 object-cover">
                 </div>
-                
+
                 <!-- Декоративные элементы -->
                 <div class="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full opacity-20"></div>
                 <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-300 rounded-full opacity-20"></div>
-                
+
                 <!-- Плашка с опытом -->
-                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 py-3 px-6 rounded-xl shadow-lg">
+                <div
+                    class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 py-3 px-6 rounded-xl shadow-lg">
                     <div class="flex items-center gap-3">
                         <div class="bg-green-500 text-white p-2 rounded-full">
                             <i class="fas fa-award"></i>
                         </div>
                         <div>
-                            <div class="font-bold text-lg">15+ лет</div>
-                            <div class="text-sm text-gray-600">успешной практики</div>
+                            <div class="font-bold text-lg">С 2014 года</div>
+                            <div class="text-sm text-gray-600">работаем в Крыму</div>
                         </div>
                     </div>
                 </div>
@@ -76,10 +88,11 @@
 
 <!-- Стили для градиента и тени -->
 <style>
-.banner-gradient {
-    background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
-}
-.lawyer-shadow {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
+    .banner-gradient {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+    }
+
+    .lawyer-shadow {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
 </style>

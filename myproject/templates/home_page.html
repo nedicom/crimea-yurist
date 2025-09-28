@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailimages_tags wagtailuserbar %}
+{% load static wagtailcore_tags wagtailimages_tags wagtailuserbar custom_menu %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +14,12 @@
         {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
         {% endblock %}
     </title>
-    <meta name="description" content="" />
+    {% if page.search_description %}
+    <meta name="description" content="{{ page.search_description }}" />
+    {% else %}
+    <meta name="description"
+        content="Юридическая компания в Крыму с 2014 года. Услуги адвоката по гражданским, арбитражным и уголовным делам. Бесплатная консультация юриста в Симферополе, Севастополе, Ялте и других городах Крыма." />
+    {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     {# Force all links in the live preview panel to be opened in a new tab #}
@@ -61,36 +66,8 @@
     {# reviews #}
     {% include "includes/reviews.html" %}
 
-    {# Main content #}
-    <main class="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-grow">
-        <!-- Основной контент -->
-        <div class="container">
-            <h1 class="text-3xl font-bold hover:underline">
-                {{ page.title }}
-            </h1>
-            <div class="bg-green-500 p-4 text-4xl">Test</div>
-            {# Вывод StreamField контента #}
-            {% if page.content %}
-            <div class="stream-content">
-                {% for block in page.content %}
-                <section class="block-{{ block.block_type }}">
-                    {% if block.block_type == 'heading' %}
-                    <h2>{{ block.value }}</h2>
-                    {% elif block.block_type == 'paragraph' %}
-                    <div class="paragraph">
-                        {{ block.value|richtext }}
-                    </div>
-                    {% elif block.block_type == 'image' %}
-                    <div class="image">
-                        {% image block.value width-800 %}
-                    </div>
-                    {% endif %}
-                </section>
-                {% endfor %}
-            </div>
-            {% endif %}
-        </div>
-    </main>
+    {# links #}
+    {% show_nested_menu %}
 
     {# Footer #}
 
@@ -127,6 +104,28 @@
         }, 10000); // 10 секунд
     </script>
     <!-- /Yandex.Metrika counter -->
+
+    <!-- Schema org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": ["LegalService", "LocalBusiness"],
+        "name": "{% if page.title %}{{ page.title }}{% else %}Юрист Крым{% endif %}",
+        "description": "{{ page.search_description|default:'Юридические услуги в Крыму' }}",
+        "telephone": "+7-978-XXX-XX-XX",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Симферополь",
+            "addressRegion": "Республика Крым"
+        },
+        "areaServed": "Республика Крым",
+        "openingHours": "Mo-Fr 09:00-18:00", 
+        "priceRange": "₽₽",
+        "url": "{{ request.scheme }}://{{ request.get_host }}"
+    }
+    </script>
+    <!-- Schema org -->
+
 </body>
 
 </html>
