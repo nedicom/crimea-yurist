@@ -1,3 +1,5 @@
+{% load wagtailcore_tags %}
+
 <div class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
     <div class="max-w-7xl mx-auto">
         <!-- Заголовок -->
@@ -6,14 +8,14 @@
                 <i class="fas fa-building"></i>
                 <span class="text-sm font-medium">О нашей компании</span>
             </div>
-            
+
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                Юридические услуги в <span class="text-blue-600">Республике Крым</span> 
+                Юридические услуги в <span class="text-blue-600">Республике Крым</span>
                 с 2014 года
             </h1>
-            
+
             <p class="text-xl text-gray-600">
-                Профессиональная правовая помощь для жителей и бизнеса Крыма. 
+                Профессиональная правовая помощь для жителей и бизнеса Крыма.
                 Знаем особенности местного законодательства и судебной практики.
             </p>
         </div>
@@ -22,21 +24,39 @@
             <!-- Текстовый блок -->
             <div class="space-y-8">
                 <!-- Основное описание -->
-                <div class="prose prose-lg max-w-none">
-                    <p class="text-gray-700 text-lg leading-relaxed">
-                        <strong>Юридическая компания в Крыму</strong> оказывает профессиональные 
-                        правовые услуги с момента вхождения полуострова в состав Российской Федерации. 
-                        Наша команда <strong>квалифицированных юристов в Симферополе</strong> и других городах 
-                        Республики Крым специализируется на решении сложных правовых вопросов 
-                        с учетом региональной специфики.
-                    </p>
-                    
-                    <p class="text-gray-700 text-lg leading-relaxed">
-                        Мы глубоко понимаем особенности <strong>законодательства Республики Крым</strong>, 
-                        местную судебную практику и административные процедуры. Это позволяет нам 
-                        эффективно защищать интересы клиентов в судах Крыма и государственных органах.
-                    </p>
-                </div>
+                {% load wagtailcore_tags %}
+
+                {% load wagtailcore_tags %}
+
+{% load wagtailcore_tags %}
+
+{% load wagtailcore_tags %}
+
+{% load wagtailcore_tags %}
+
+<div class="space-y-8">
+    {% for block in page.content %}
+        {% if block.block_type == 'heading' %}
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">{{ block.value }}</h2>
+        
+        {% elif block.block_type == 'paragraph' %}
+            <div class="
+                text-gray-700 
+                [&>p]:mb-4 [&>p]:text-justify [&>p:last-child]:mb-0
+                [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-gray-900 [&>h2]:mt-8 [&>h2]:mb-4
+                [&>h3]:text-xl [&>h3]:font-bold [&>h3]:text-gray-900 [&>h3]:mt-6 [&>h3]:mb-3
+                [&>ul]:list-disc [&>ul]:ml-6 [&>ul]:my-4
+                [&>ol]:list-decimal [&>ol]:ml-6 [&>ol]:my-4
+                [&>li]:mb-2
+                [&_b]:font-semibold [&_strong]:font-semibold
+            ">
+                {{ block.value|richtext }}
+            </div>
+        {% else %}
+            {% include_block block %}
+        {% endif %}
+    {% endfor %}
+</div> 
 
                 <!-- Преимущества -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -46,20 +66,22 @@
                         </div>
                         <div>
                             <h3 class="font-bold text-gray-900 mb-2">Работаем по всему Крыму</h3>
-                            <p class="text-gray-600 text-sm">Юридические услуги в Симферополе, Севастополе, Ялте и других городах</p>
+                            <p class="text-gray-600 text-sm">Юридические услуги в Симферополе, Севастополе, Ялте и
+                                других городах</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex items-start gap-4">
                         <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-scale-balanced text-green-600"></i>
                         </div>
                         <div>
                             <h3 class="font-bold text-gray-900 mb-2">Специализация на праве Крыма</h3>
-                            <p class="text-gray-600 text-sm">Знаем особенности местного законодательства и судебной практики</p>
+                            <p class="text-gray-600 text-sm">Знаем особенности местного законодательства и судебной
+                                практики</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex items-start gap-4">
                         <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-users text-purple-600"></i>
@@ -69,21 +91,23 @@
                             <p class="text-gray-600 text-sm">Адвокаты по гражданским, арбитражным и уголовным делам</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex items-start gap-4">
                         <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-shield-alt text-red-600"></i>
                         </div>
                         <div>
                             <h3 class="font-bold text-gray-900 mb-2">Защита прав крымчан</h3>
-                            <p class="text-gray-600 text-sm">Помогаем в вопросах недвижимости, земельных споров, наследства</p>
+                            <p class="text-gray-600 text-sm">Помогаем в вопросах недвижимости, земельных споров,
+                                наследства</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Кнопка -->
                 <div class="pt-4">
-                    <a href="/contacts/" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg transition-colors">
+                    <a href="/contacts/"
+                        class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg transition-colors">
                         <i class="fas fa-phone"></i>
                         Бесплатная консультация юриста в Крыму
                     </a>
@@ -95,7 +119,7 @@
                 <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">
                     Наши достижения в Крыму
                 </h3>
-                
+
                 <div class="grid grid-cols-2 gap-6 mb-8">
                     <div class="text-center">
                         <div class="text-4xl font-bold text-blue-600 mb-2">9+</div>
@@ -154,15 +178,17 @@
         <!-- Доверие клиентов -->
         <div class="mt-12 text-center">
             <p class="text-gray-600 mb-6">
-                <strong>Юридическая помощь в Республике Крым</strong> — это наша специализация. 
-                Доверьте решение ваших правовых вопросов профессионалам, которые знают 
+                <strong>Юридическая помощь в Республике Крым</strong> — это наша специализация.
+                Доверьте решение ваших правовых вопросов профессионалам, которые знают
                 особенности законодательства Крыма и имеют успешную судебную практику.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/services/" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                <a href="/services/"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
                     Все услуги юриста в Крыму
                 </a>
-                <a href="/contacts/" class="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-3 px-6 rounded-lg transition-colors">
+                <a href="/contacts/"
+                    class="bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold py-3 px-6 rounded-lg transition-colors">
                     <i class="fas fa-map-marker-alt mr-2"></i>
                     Контакты в Симферополе
                 </a>

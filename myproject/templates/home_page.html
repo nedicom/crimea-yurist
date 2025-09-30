@@ -11,7 +11,6 @@
         {% endblock %}
         {% block title_suffix %}
         {% wagtail_site as current_site %}
-        {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
         {% endblock %}
     </title>
     {% if page.search_description %}
@@ -27,9 +26,6 @@
     <base target="_blank">
     {% endif %}
 
-    {% block extra_css %}
-    {# Override this in templates to add extra stylesheets #}
-    {% endblock %}
     <link href="{% static 'css/output.css' %}" rel="stylesheet">
 </head>
 
@@ -37,16 +33,8 @@
     {% wagtailuserbar %}
 
     {# Header #}
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light p-5">
-            <div class="container">
-                <a class="navbar-brand" href="/">
-                    {{ settings.core.SiteSettings.site_name }}
-                </a>
-                {% include "includes/navigation.html" %}
-            </div>
-        </nav>
-    </header>
+    {% include "includes/navigation.html" %}
+
     {# Banner #}
     {% include "includes/frontbanner.html" %}
 
