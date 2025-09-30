@@ -58,30 +58,40 @@
 
             <!-- Блок с фото юриста -->
             <div class="relative">
-                <div class="relative z-10 lawyer-shadow rounded-2xl overflow-hidden">
+                <!-- Контейнер без overflow-hidden -->
+                <div class="relative z-10 lawyer-shadow rounded-2xl">
+                    {% if page.hero_image %}
+                    {% with original_extension=page.hero_image.file.name|lower|slice:"-4:" %}
+                    <img src="https://crimea-yurist.ru{{ page.hero_image.file.url }}" alt="{{ page.title }}"
+                        class="w-full h-96 object-cover rounded-2xl" class="w-full h-96 object-cover rounded-2xl">
+                    {% endwith %}
+                    {% else %}
                     <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                         alt="Профессиональный юрист в Крыму - юридические услуги в Симферополе, Севастополе, Ялте"
-                        class="w-full h-96 object-cover">
+                        class="w-full h-96 object-cover rounded-2xl">
+
+                    {% endif %}
                 </div>
 
                 <!-- Декоративные элементы -->
-                <div class="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full opacity-20"></div>
-                <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-300 rounded-full opacity-20"></div>
+                <div class="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full opacity-20 z-0"></div>
+                <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-300 rounded-full opacity-20 z-0"></div>
 
-                <!-- Плашка с опытом -->
+                <!-- Плашка с опытом - ВНЕ контейнера с изображением -->
                 <div
-                    class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 py-3 px-6 rounded-xl shadow-lg">
+                    class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 py-3 px-6 rounded-xl shadow-lg z-30">
                     <div class="flex items-center gap-3">
                         <div class="bg-green-500 text-white p-2 rounded-full">
                             <i class="fas fa-award"></i>
                         </div>
                         <div>
-                            <div class="font-bold text-lg">С 2014 года</div>
+                            <div class="font-bold text-lg">С 2009 года</div>
                             <div class="text-sm text-gray-600">работаем в Крыму</div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
