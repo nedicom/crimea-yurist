@@ -82,6 +82,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "myproject.wsgi.application"
 
+# settings.py
+WAGTAILIMAGES_FORMAT_CONVERSIONS = {
+    'webp': 'webp',
+    'jpeg': 'webp',  # Конвертировать JPEG в WebP
+    'png': 'webp',   # Конвертировать PNG в WebP
+}
+
+WAGTAILIMAGES_WEBP_QUALITY = 80  # Качество 80%
+
+# Оптимизация размеров
+WAGTAILIMAGES_MAX_UPLOAD_SIZE = 20 * 1024 * 1024  # 20MB максимум
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

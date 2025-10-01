@@ -26,10 +26,8 @@
     <base target="_blank">
     {% endif %}
 
-    <link rel="preload" href="{% static 'css/output.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="/css/output.css">
-    </noscript>
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+    
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
