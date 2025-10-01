@@ -12,8 +12,17 @@ Python 3.7.0 + front (html, js, css)
 
 options:
 # tailwindcss install
+# linux
 curl -LO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-windows-x64.exe
+chmod +x tailwindcss-linux-x64
+mv tailwindcss-linux-x64 tailwindcss
+# windows
+Invoke-WebRequest -Uri "https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-windows-x64.exe" -OutFile "tailwindcss-windows-x64.exe"
 move tailwindcss-windows-x64.exe tailwindcss.exe
-.\tailwindcss.exe init
+
 # tailwindcss usage
+# linux
+./tailwindcss --input ./myproject/src/style.css --output ./myproject/static/css/output.css --watch --content "./myproject/templates/**/*.html"
+
+# windows
 .\tailwindcss.exe --input .\myproject\src\style.css --output .\myproject\static\css\output.css --watch --content "./myproject/templates/**/*.html"
