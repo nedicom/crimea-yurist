@@ -28,19 +28,19 @@
 
                 {% load wagtailcore_tags %}
 
-{% load wagtailcore_tags %}
+                {% load wagtailcore_tags %}
 
-{% load wagtailcore_tags %}
+                {% load wagtailcore_tags %}
 
-{% load wagtailcore_tags %}
+                {% load wagtailcore_tags %}
 
-<div class="space-y-8">
-    {% for block in page.content %}
-        {% if block.block_type == 'heading' %}
-            <h2 class="text-3xl font-bold text-gray-900 mb-6">{{ block.value }}</h2>
-        
-        {% elif block.block_type == 'paragraph' %}
-            <div class="
+                <div class="space-y-8">
+                    {% for block in page.content %}
+                    {% if block.block_type == 'heading' %}
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">{{ block.value }}</h2>
+
+                    {% elif block.block_type == 'paragraph' %}
+                    <div class="
                 text-gray-700 
                 [&>p]:mb-4 [&>p]:text-justify [&>p:last-child]:mb-0
                 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-gray-900 [&>h2]:mt-8 [&>h2]:mb-4
@@ -50,13 +50,13 @@
                 [&>li]:mb-2
                 [&_b]:font-semibold [&_strong]:font-semibold
             ">
-                {{ block.value|richtext }}
-            </div>
-        {% else %}
-            {% include_block block %}
-        {% endif %}
-    {% endfor %}
-</div> 
+                        {{ block.value|richtext }}
+                    </div>
+                    {% else %}
+                    {% include_block block %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
 
                 <!-- Преимущества -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">

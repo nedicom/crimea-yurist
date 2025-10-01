@@ -426,9 +426,6 @@
   .h-96 {
     height: calc(var(--spacing) * 96);
   }
-  .h-\[400px\] {
-    height: 400px;
-  }
   .h-full {
     height: 100%;
   }
@@ -467,9 +464,6 @@
   }
   .max-w-7xl {
     max-width: var(--container-7xl);
-  }
-  .max-w-\[560px\] {
-    max-width: 560px;
   }
   .max-w-full {
     max-width: 100%;
@@ -1142,13 +1136,6 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-blue-800);
-      }
-    }
-  }
-  .hover\:text-gray-800 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-gray-800);
       }
     }
   }
