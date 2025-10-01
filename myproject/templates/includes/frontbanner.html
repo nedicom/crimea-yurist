@@ -3,13 +3,9 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <!-- Текстовый блок -->
       <div class="text-white space-y-6">
-        <div
-          class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full"
-        >
+        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
           <i class="fas fa-gavel text-yellow-400"></i>
-          <span class="text-sm font-medium"
-            >Профессиональные юристы в Крыму</span
-          >
+          <span class="text-sm font-medium">Профессиональные юристы в Крыму</span>
         </div>
 
         <!-- SEO-заголовок -->
@@ -21,125 +17,102 @@
 
         <!-- SEO-описание -->
         <p class="text-xl text-blue-100 leading-relaxed">
-          {% if page.search_description %} {{ page.search_description }} 
-          {% else%} 
+          {% if page.search_description %} {{ page.search_description }}
+          {% else%}
           Юридическая компания в Крыму с 2014 года. Услуги адвоката по
           гражданским, арбитражным и уголовным делам. Бесплатная консультация
-          юриста в Симферополе, Севастополе, Ялте и других городах Крыма. 
+          юриста в Симферополе, Севастополе, Ялте и других городах Крыма.
           {% endif %}
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 pt-4">
-          <a
-            href="/uslugi-yurista-krym/"
-            class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 text-center"
-          >
+          <a href="/uslugi-yurista-krym/"
+            class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 text-center">
             <i class="fas fa-scale-balanced mr-2"></i>
             Услуги юриста в Крыму
           </a>
 
-          <a
-            href="#consultation"
-            class="bg-transparent border-2 border-white hover:bg-white/10 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 text-center"
-          >
+          <a href="#consultation"
+            class="bg-transparent border-2 border-white hover:bg-white/10 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 text-center">
             <i class="fas fa-phone mr-2"></i>
             Бесплатная консультация
           </a>
         </div>
 
         <!-- SEO-ключевые преимущества -->
-         <div class="flex items-center gap-5">
-        <div>
-          <i class="fas fa-check-circle text-green-400"></i>
-          <a
-            href="#prices"
-            class="hover:text-blue-400 transition-all duration-300 cursor-pointer hover:scale-105 transform"
-          >
-            Цены
-          </a>
-        </div>
-
-        <div>
-          <i class="fas fa-check-circle text-green-400"></i>
-          <a
-            href="#address"
-            class="hover:text-blue-400 transition-all duration-300 cursor-pointer hover:scale-105 transform"
-          >
-            Контакты
-          </a>
-        </div>
-
-        <div >
-          <i class="fas fa-check-circle text-green-400"></i>
-          <a
-            href="#reviews"
-            class="hover:text-blue-400 transition-all duration-300 cursor-pointer hover:scale-105 transform"
-          >
-            Отзывы
-          </a>
-        </div>
-</div>
-
-      </div>
-              <!-- Блок с фото юриста -->
-        <div class="relative">
-          <!-- Контейнер без overflow-hidden -->
-          <div class="relative z-10 lawyer-shadow rounded-2xl">
-            {% if page.hero_image %} 
-            {% with original_extension=page.hero_image.file.name|lower|slice:"-4:" %}
-            <img
-              src="https://crimea-yurist.ru{{ page.hero_image.file.url }}"
-              alt="{{ page.title }}"
-              class="w-full h-96 object-cover rounded-2xl"
-              class="w-full h-96 object-cover rounded-2xl"
-            />
-            {% endwith %} 
-            {% else %}
-            <img
-              src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-              alt="Профессиональный юрист в Крыму - юридические услуги в Симферополе, Севастополе, Ялте"
-              class="w-full h-96 object-cover rounded-2xl"
-            />
-
-            {% endif %}
+        <div class="flex items-center gap-5">
+          <div>
+            <i class="fas fa-check-circle text-green-400"></i>
+            <a href="#prices"
+              class="hover:text-blue-400 transition-all duration-300 cursor-pointer hover:scale-105 transform">
+              Цены
+            </a>
           </div>
 
-          <!-- Декоративные элементы -->
-          <div
-            class="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full opacity-20 z-0"
-          ></div>
-          <div
-            class="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-300 rounded-full opacity-20 z-0"
-          ></div>
-          
+          <div>
+            <i class="fas fa-check-circle text-green-400"></i>
+            <a href="#address"
+              class="hover:text-blue-400 transition-all duration-300 cursor-pointer hover:scale-105 transform">
+              Контакты
+            </a>
+          </div>
 
-          <!-- Плашка с опытом - ВНЕ контейнера с изображением -->
-          <div
-            class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 py-3 px-6 rounded-xl shadow-lg z-30"
-          >
-            <div class="flex items-center gap-3">
-              <div class="bg-green-500 text-white p-2 rounded-full">
-                <i class="fas fa-award"></i>
-              </div>
-              <div>
-                <div class="font-bold text-lg">С 2009 года</div>
-                <div class="text-sm text-gray-600">работаем в Крыму</div>
-              </div>
+          <div>
+            <i class="fas fa-check-circle text-green-400"></i>
+            <a href="#reviews"
+              class="hover:text-blue-400 transition-all duration-300 cursor-pointer hover:scale-105 transform">
+              Отзывы
+            </a>
+          </div>
+        </div>
+
+      </div>
+      <!-- Блок с фото юриста -->
+      <div class="relative">
+        <!-- Контейнер без overflow-hidden -->
+        <div class="relative z-10 lawyer-shadow rounded-2xl">
+          {% if page.hero_image %}
+          {% with original_extension=page.hero_image.file.name|lower|slice:"-4:" %}
+          <img fetchpriority=high src="https://crimea-yurist.ru{{ page.hero_image.file.url }}" alt="{{ page.title }}"
+            class="w-full h-96 object-cover rounded-2xl" class="w-full h-96 object-cover rounded-2xl" />
+          {% endwith %}
+          {% else %}
+          <img fetchpriority=high
+            src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Профессиональный юрист в Крыму - юридические услуги в Симферополе, Севастополе, Ялте"
+            class="w-full h-96 object-cover rounded-2xl" />
+          {% endif %}
+        </div>
+
+        <!-- Декоративные элементы -->
+        <div class="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full opacity-20 z-0"></div>
+        <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-300 rounded-full opacity-20 z-0"></div>
+
+
+        <!-- Плашка с опытом - ВНЕ контейнера с изображением -->
+        <div
+          class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 py-3 px-6 rounded-xl shadow-lg z-30">
+          <div class="flex items-center gap-3">
+            <div class="bg-green-500 text-white p-2 rounded-full">
+              <i class="fas fa-award"></i>
+            </div>
+            <div>
+              <div class="font-bold text-lg">С 2009 года</div>
+              <div class="text-sm text-gray-600">работаем в Крыму</div>
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
 
   <!-- Стили для градиента и тени -->
   <style>
     .banner-gradient {
-      background: linear-gradient(
-        135deg,
-        #1e3a8a 0%,
-        #3730a3 50%,
-        #1e40af 100%
-      );
+      background: linear-gradient(135deg,
+          #1e3a8a 0%,
+          #3730a3 50%,
+          #1e40af 100%);
     }
 
     .lawyer-shadow {
