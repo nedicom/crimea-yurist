@@ -25,7 +25,6 @@ class HomePage(Page):
     city = models.CharField("Город", max_length=100, blank=True, default="Симферополь")
     region = models.CharField("Регион", max_length=100, blank=True, default="Республика Крым")
     postal_code = models.CharField("Почтовый индекс", max_length=20, blank=True)
-    country = models.CharField("Страна", max_length=100, default="Россия")
     
     phone = models.CharField("Телефон", max_length=20, blank=True)
     email = models.EmailField("Email", blank=True)
@@ -50,7 +49,7 @@ class HomePage(Page):
         MultiFieldPanel([
             FieldPanel('hero_title'),
             FieldPanel('hero_image'),
-        ], heading="Герой секция"),
+        ], heading="Герой Фото юриста"),
         
         FieldPanel('description'),
         FieldPanel('content'),
@@ -60,7 +59,6 @@ class HomePage(Page):
             FieldPanel('city'),
             FieldPanel('region'),
             FieldPanel('postal_code'),
-            FieldPanel('country'),
             FieldPanel('map_url'),
         ], heading="Адрес и география"),
         
@@ -101,7 +99,6 @@ class HomePage(Page):
                 "addressLocality": self.city,
                 "addressRegion": self.region,
                 "postalCode": self.postal_code,
-                "addressCountry": self.country
             },
             "hasMap": self.map_url if self.map_url else None
         }
@@ -131,7 +128,6 @@ class CityPage(Page):
     city = models.CharField("Город", max_length=100, blank=True)
     region = models.CharField("Регион", max_length=100, blank=True)
     postal_code = models.CharField("Почтовый индекс", max_length=20, blank=True)
-    country = models.CharField("Страна", max_length=100, default="Россия")
     
     phone = models.CharField("Телефон", max_length=20, blank=True)
     email = models.EmailField("Email", blank=True)
@@ -168,7 +164,6 @@ class CityPage(Page):
             FieldPanel('city'),
             FieldPanel('region'),
             FieldPanel('postal_code'),
-            FieldPanel('country'),
             FieldPanel('map_url'),
         ], heading="Адрес и география"),
         
@@ -209,7 +204,6 @@ class CityPage(Page):
                 "addressLocality": self.city,
                 "addressRegion": self.region,
                 "postalCode": self.postal_code,
-                "addressCountry": self.country
             },
             "hasMap": self.map_url if self.map_url else None
         }
