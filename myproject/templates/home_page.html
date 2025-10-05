@@ -27,7 +27,7 @@
     {% endif %}
 
     <link href="{% static 'css/output.css' %}" rel="stylesheet">
-    
+
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
@@ -99,6 +99,83 @@
         "url": "{{ request.scheme }}://{{ request.get_host }}"
     }
     </script>
+
+
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "LegalService",
+        "name": "{% if page.title %}{{ page.title }}{% else %}Юрист Крым{% endif %}",
+        "description": "{{ page.search_description|default:'Юридические услуги в Крыму' }}",
+        "url": "https://crimea-yurist.ru",
+        
+        // КОНТАКТЫ И АДРЕС
+        "telephone": "+7 978 910-42-97",
+        "email": "mail@crimea-yurist.ru",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ул. Долгоруковская, д. 5а",
+            "addressLocality": "Симферополь",
+            "addressRegion": "Республика Крым", 
+            "postalCode": "295000",
+            "addressCountry": "RU"
+        }
+
+        // ГЕОГРАФИЯ ОБСЛУЖИВАНИЯ
+        "areaServed": "Республика Крым",
+
+        // ЧАСЫ РАБОТЫ
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "09:00",
+                "closes": "21:00"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Saturday", "Sunday"],
+                "opens": "09:00", 
+                "closes": "21:00"
+            }
+        ]
+
+        // УСЛУГИ (Самое важное для SEO)
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Юридические услуги",
+            "itemListElement": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                "@type": "Service",
+                "name": "Банкротство физических лиц",
+                "description": "Списание долгов через процедуру банкротства"
+                }
+            },
+            {
+                "@type": "Offer", 
+                "itemOffered": {
+                "@type": "Service",
+                "name": "Семейные споры",
+                "description": "Развод, раздел имущества, алименты"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                "@type": "Service", 
+                "name": "Жилищные споры",
+                "description": "Споры с застройщиками, соседями, УК"
+                }
+            }
+            ]
+        },
+
+        // ЦЕНОВОЙ ДИАПАЗОН
+        "priceRange": "$$"
+        }
+</script>
     <!-- Schema org -->
 
 </body>
