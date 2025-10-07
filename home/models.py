@@ -109,7 +109,7 @@ class HomePage(Page):
 
 class CityPage(Page):
     """Страница города - Юрист Симферополь"""
-    city_name = models.CharField("Название города", max_length=100, help_text="Например: Юрист Симферополь")
+    city_name = models.CharField("Название услуги по городу", max_length=100, help_text="Например: Юрист Симферополь")
     
     # Герой секция для города
     hero_title = models.CharField("Заголовок", max_length=255, blank=True)
@@ -133,13 +133,13 @@ class CityPage(Page):
     map_url = models.URLField("Ссылка на карту", blank=True, default="https://yandex.ru/map-widget/v1/?ll=34.097897%2C44.954033&mode=search&oid=245071578035&ol=biz&z=16.64")
     
     # Описание и контент
-    description = RichTextField("Описание услуг в городе", blank=True)
+    description = RichTextField("УТП описание услуг в городе", blank=True)
     
     content = StreamField([
         ('heading', blocks.CharBlock(form_classname="title", icon="title", verbose_name="Заголовок")),
         ('paragraph', blocks.RichTextBlock(icon="pilcrow", verbose_name="Текст")),
         ('image', ImageChooserBlock(icon="image", verbose_name="Картинка")),
-    ], use_json_field=True, blank=True, verbose_name="Дополнительный контент")
+    ], use_json_field=True, blank=True, verbose_name="Подробное описание")
 
     template = "city_page.html"
 
