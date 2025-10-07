@@ -1,31 +1,161 @@
-{% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags wagtailuserbar custom_menu %}
 
-{% block content %}
-<div class="container">
-    <h1 class="text-3xl font-bold hover:underline">
-        {{ page.title }}
-    </h1>
-666123
-    {# Вывод StreamField контента #}
-    {% if page.content %}
-    <div class="stream-content">222
-        {% for block in page.content %}
-        <section class="block-{{ block.block_type }}">
-            {% if block.block_type == 'heading' %}
-            <h2>{{ block.value }}</h2>
-            {% elif block.block_type == 'paragraph' %}
-            <div class="paragraph">
-                {{ block.value|richtext }}
-            </div>
-            {% elif block.block_type == 'image' %}
-            <div class="image">
-                {% image block.value width-800 %}
-            </div>
-            {% endif %}
-        </section>
-        {% endfor %}
-    </div>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <title>
+        {% block title %}
+        {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+        {% endblock %}
+        {% block title_suffix %}
+        {% wagtail_site as current_site %}
+        {% endblock %}
+    </title>
+    {% if page.search_description %}
+    <meta name="description" content="{{ page.search_description }}" />
+    {% else %}
+    <meta name="description"
+        content="Юридическая компания в Крыму с 2014 года. Услуги адвоката по гражданским, арбитражным и уголовным делам. Бесплатная консультация юриста в Симферополе, Севастополе, Ялте и других городах Крыма." />
     {% endif %}
-</div>
-{% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {# Force all links in the live preview panel to be opened in a new tab #}
+    {% if request.in_preview_panel %}
+    <base target="_blank">
+    {% endif %}
+
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+    {% wagtailuserbar %}
+
+    {# Header #}
+    {% include "includes/navigation.html" %}
+
+    {# breadcrumbs #}
+    {% include "includes/breadcrumbs.html" %}
+    
+    {# Banner #}
+    {% include "includes/frontbanner.html" %}
+
+    {# prices #}
+    {% include "includes/tableprices.html" %}
+
+    {# prices #}
+    {% include "includes/prices.html" %}
+
+    {# description #}
+    {% include "includes/description.html" %}
+
+    {# contacts #}
+    {% include "includes/contacts.html" %}
+
+    {# reviews #}
+    {% include "includes/reviews.html" %}
+
+    {# links #}
+    {% show_nested_menu %}
+
+    {# Footer #}
+    {% include "includes/footer.html" %}
+
+    {# Global javascript #}
+    <script defer type="text/javascript" src="{% static 'js/myproject.js' %}"></script>
+
+    {% block extra_js %}
+    {# Override this in templates to add extra javascript #}
+    {% endblock %}
+
+
+    <!-- Yandex.Metrika counter -->
+    <script>
+        // Загрузка метрики с задержкой
+        setTimeout(function () {
+            var script = document.createElement('script');
+            script.src = "{% static 'js/metrika.js' %}";
+            script.async = true;
+            document.body.appendChild(script);
+        }, 10000); // 10 секунд
+    </script>
+    <!-- /Yandex.Metrika counter -->
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Правовой эксперт Добренький Андрей",
+    "description": "{{ page.search_description|default:'Юридические услуги в Крыму' }}",
+    "url": "{{ request.scheme }}://{{ request.get_host }}",
+    "logo": "{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo.jpg' %}",
+    "telephone": "{{ page.phone|default:'+7 978 910-42-97' }}",
+    "email": "mail@crimea-yurist.ru",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{ page.street_address|default:'ул. Долгоруковская, д. 5а' }}",
+        "addressLocality": "{{ page.city|default:'Симферополь' }}",
+        "addressRegion": "{{ page.region|default:'Республика Крым' }}",
+        "postalCode": "{{ page.postal_code|default:'295000' }}",
+        "addressCountry": "RU"
+    },
+    "sameAs": [
+        "https://vk.com/lawyerdobrenkiy"
+    ],
+    "founder": {
+        "@type": "Person",
+        "name": "Добренький Андрей Дмитриевич"
+    }
+}
+</script>
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "{% if page.title %}{{ page.title }}{% else %}Юрист Крым{% endif %}",
+    "description": "{{ page.search_description|default:'Юридические услуги в Крыму' }}",
+    "url": "{{ request.scheme }}://{{ request.get_host }}",
+    "telephone": "{{ page.phone|default:'+7 978 910-42-97' }}",
+    "email": "mail@crimea-yurist.ru",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{ page.street_address|default:'ул. Долгоруковская, д. 5а' }}",
+        "addressLocality": "{{ page.city|default:'Симферополь' }}",
+        "addressRegion": "{{ page.region|default:'Республика Крым' }}",
+        "postalCode": "{{ page.postal_code|default:'295000' }}",
+        "addressCountry": "RU"
+    },
+    "areaServed": {
+        "@type": "State",
+        "name": "{{ page.region|default:'Республика Крым' }}"
+    },
+    "openingHoursSpecification": [
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "21:00"
+        },
+        {
+            "@type": "OpeningHoursSpecification", 
+            "dayOfWeek": ["Saturday", "Sunday"],
+            "opens": "09:00",
+            "closes": "21:00"
+        }
+    ],
+    "parentOrganization": {
+        "@type": "Organization",
+        "name": "{% if page.title %}{{ page.title }}{% else %}Юрист Крым{% endif %}"
+    },
+    "priceRange": "$$"
+}
+</script>
+
+    <!-- Schema org -->
+
+</body>
+
+</html>
