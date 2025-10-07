@@ -118,7 +118,7 @@
     "name": "{% if page.title %}{{ page.title }}{% else %}Юрист Крым{% endif %}",
     "description": "{{ page.search_description|default:'Юридические услуги в Крыму' }}",
     "url": "{{ request.scheme }}://{{ request.get_host }}",
-    "telephone": "+7 978 910-42-97",
+    "telephone": "{{ page.phone|default:'+7 978 910-42-97' }}",
     "email": "mail@crimea-yurist.ru",
     "address": {
         "@type": "PostalAddress",
@@ -153,6 +153,7 @@
     "priceRange": "$$"
 }
 </script>
+
     <!-- Schema org -->
 
 </body>

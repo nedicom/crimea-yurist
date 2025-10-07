@@ -23,11 +23,11 @@ class HomePage(Page):
     # Контактная информация для главной страницы
     street_address = models.CharField("Улица, дом", max_length=255, blank=True)
     city = models.CharField("Город", max_length=100, blank=True, default="Симферополь")
-    region = models.CharField("Регион", max_length=100, blank=True, default="Республика Крым")
+    region = models.CharField("Регион", max_length=100, default="Республика Крым")
     postal_code = models.CharField("Почтовый индекс", max_length=20, blank=True)
     
-    phone = models.CharField("Телефон", max_length=20, blank=True)
-    email = models.EmailField("Email", blank=True)
+    phone = models.CharField("Телефон", max_length=20, default="+7 978 910-42-97")
+    email = models.EmailField("Email", default="mail@crimea-yurist.ru")
     map_url = models.URLField("Ссылка на карту", blank=True)
     
     description = RichTextField("Описание услуг", blank=True)
@@ -126,11 +126,11 @@ class CityPage(Page):
     # Адрес и контакты
     street_address = models.CharField("Улица, дом", max_length=255, blank=True)
     city = models.CharField("Город", max_length=100, blank=True)
-    region = models.CharField("Регион", max_length=100, blank=True)
+    region = models.CharField("Регион", max_length=100, default="Республика Крым")
     postal_code = models.CharField("Почтовый индекс", max_length=20, blank=True)
     
-    phone = models.CharField("Телефон", max_length=20, blank=True)
-    email = models.EmailField("Email", blank=True)
+    phone = models.CharField("Телефон", max_length=20,  default="+7 978 910-42-97")
+    email = models.EmailField("Email", default="mail@crimea-yurist.ru")
     map_url = models.URLField("Ссылка на карту", blank=True)
     
     # Описание и контент
@@ -214,47 +214,49 @@ class CityPage(Page):
 
 
 class ServicePage(Page):
-    """Страница услуги в городе - Семейный юрист Симферополь"""
+    """Страница услуги - Семейный юрист Симферополь"""
     
     # Основная информация об услуге
-    service_type = models.CharField("Тип услуги", max_length=200, help_text="Например: Семейный юрист, Недвижимость, Наследство")
-    short_description = models.TextField("Краткое описание", max_length=200)
-    full_description = RichTextField("Полное описание")
-    price = models.DecimalField("Стоимость", max_digits=10, decimal_places=2, null=True, blank=True)
-    price_description = models.CharField("Описание цены", max_length=100, blank=True, help_text="Например: от, договорная, бесплатная консультация")
+    service_name = models.CharField("Название услуги", max_length=200, help_text="Например: Семейный юрист Симферополь")
     
-    # Адрес оказания услуги (может отличаться от адреса города)
-    address = models.TextField("Адрес оказания услуги", blank=True)
-    
-    # Визуальный контент
-    service_image = models.ForeignKey(
+    # Герой секция для услуги
+    hero_title = models.CharField("Заголовок", max_length=255, blank=True)
+    hero_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
-        verbose_name="Главное фото услуги"
+        verbose_name="Фон картинки"
     )
     
-    photos = StreamField([
-        ('photo', ImageChooserBlock(verbose_name="Фото")),
-    ], use_json_field=True, blank=True, verbose_name="Дополнительные фотографии")
+    # Основная информация
+    service_type = models.CharField("Тип услуги", max_length=200, help_text="Например: Семейный юрист, Недвижимость, Наследство")
+    short_description = models.TextField("Краткое описание", max_length=200)
     
-    # График работы для этой услуги
-    working_hours = StreamField([
-        ('day', blocks.StructBlock([
-            ('day_name', blocks.ChoiceBlock(choices=[
-                ('monday', 'Понедельник'),
-                ('tuesday', 'Вторник'),
-                ('wednesday', 'Среда'),
-                ('thursday', 'Четверг'),
-                ('friday', 'Пятница'),
-                ('saturday', 'Суббота'),
-                ('sunday', 'Воскресенье'),
-            ], verbose_name="День недели")),
-            ('hours', blocks.CharBlock(verbose_name="Часы работы", help_text="Например: 09:00-18:00")),
-        ], verbose_name="Рабочий день"))
-    ], use_json_field=True, blank=True, verbose_name="График работы")
+    # Стоимость услуги
+    price = models.DecimalField("Стоимость", max_digits=10, decimal_places=2, null=True, blank=True, default="1000")
+    price_description = models.CharField("Описание цены", max_length=100, blank=True, default="от", help_text="Например: от, договорная, бесплатная консультация")
+    
+    # Адрес оказания услуги (может отличаться от адреса города)
+    street_address = models.CharField("Улица, дом", max_length=255, blank=True)
+    city = models.CharField("Город", max_length=100, blank=True)
+    region = models.CharField("Регион", max_length=100, default="Республика Крым")
+    postal_code = models.CharField("Почтовый индекс", max_length=20, blank=True)
+    
+    # Контакты для услуги
+    phone = models.CharField("Телефон", max_length=20, default="+7 978 910-42-97")
+    email = models.EmailField("Email", default="mail@crimea-yurist.ru")
+    map_url = models.URLField("Ссылка на карту", blank=True)
+    
+    # Описание и контент
+    description = RichTextField("Описание услуги", blank=True)
+    
+    content = StreamField([
+        ('heading', blocks.CharBlock(form_classname="title", icon="title", verbose_name="Заголовок")),
+        ('paragraph', blocks.RichTextBlock(icon="pilcrow", verbose_name="Текст")),
+        ('image', ImageChooserBlock(icon="image", verbose_name="Картинка")),
+    ], use_json_field=True, blank=True, verbose_name="Дополнительный контент")
 
     template = "service_page.html"
 
@@ -263,28 +265,46 @@ class ServicePage(Page):
     subpage_types = []  # Не может иметь дочерних страниц
 
     content_panels = Page.content_panels + [
+        FieldPanel('service_name'),
+        
+        MultiFieldPanel([
+            FieldPanel('hero_title'),
+            FieldPanel('hero_image'),
+        ], heading="Герой секция"),
+        
         MultiFieldPanel([
             FieldPanel('service_type'),
-            FieldPanel('service_image'),
+            FieldPanel('short_description'),
         ], heading="Основная информация"),
         
-        FieldPanel('short_description'),
-        FieldPanel('full_description'),
+        FieldPanel('description'),
+        FieldPanel('content'),
         
         MultiFieldPanel([
             FieldPanel('price'),
             FieldPanel('price_description'),
         ], heading="Стоимость услуги"),
         
-        FieldPanel('address'),
-        FieldPanel('photos'),
-        FieldPanel('working_hours'),
+        MultiFieldPanel([
+            FieldPanel('street_address'),
+            FieldPanel('city'),
+            FieldPanel('region'),
+            FieldPanel('postal_code'),
+            FieldPanel('map_url'),
+        ], heading="Адрес оказания услуги"),
+        
+        MultiFieldPanel([
+            FieldPanel('phone'),
+            FieldPanel('email'),
+        ], heading="Контактная информация для услуги"),
     ]
 
     search_fields = Page.search_fields + [
+        index.SearchField('service_name'),
         index.SearchField('service_type'),
         index.SearchField('short_description'),
-        index.SearchField('full_description'),
+        index.SearchField('description'),
+        index.SearchField('content'),
         index.FilterField('price'),
     ]
 
@@ -298,19 +318,66 @@ class ServicePage(Page):
         """Генерация данных для Schema.org для услуги"""
         city_page = self.get_parent().specific
         
-        return {
+        schema_data = {
             "@context": "https://schema.org",
             "@type": "Service",
-            "name": f"{self.service_type} - {city_page.city_name}",
-            "description": self.short_description,
-            "offeredBy": {
-                "@type": "LegalService",
-                "name": city_page.city_name
-            },
-            "areaServed": city_page.city,
-            "price": f"{self.price} RUB" if self.price else self.price_description
+            "name": self.service_name or self.title,
+            "description": self.short_description or self.description,
+            "serviceType": self.service_type,
         }
+        
+        # Добавляем цену, если указана
+        if self.price:
+            schema_data["offers"] = {
+                "@type": "Offer",
+                "price": str(self.price),
+                "priceCurrency": "RUB",
+                "description": self.price_description
+            }
+        elif self.price_description:
+            schema_data["offers"] = {
+                "@type": "Offer",
+                "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "description": self.price_description
+                }
+            }
+        
+        # Добавляем адрес, если указан
+        if any([self.street_address, self.city, self.region]):
+            schema_data["areaServed"] = {
+                "@type": "Place",
+                "name": f"{self.city}, {self.region}" if self.city and self.region else self.city or self.region
+            }
+            
+            if any([self.street_address, self.city, self.region, self.postal_code]):
+                schema_data["areaServed"]["address"] = {
+                    "@type": "PostalAddress",
+                    "streetAddress": self.street_address,
+                    "addressLocality": self.city,
+                    "addressRegion": self.region,
+                    "postalCode": self.postal_code,
+                }
+        
+        # Добавляем контакты
+        if self.phone:
+            schema_data["telephone"] = self.phone
+        if self.email:
+            schema_data["email"] = self.email
+        
+        # Добавляем ссылку на карту
+        if self.map_url:
+            schema_data["hasMap"] = self.map_url
+        
+        # Добавляем информацию о провайдере услуги (город)
+        schema_data["provider"] = {
+            "@type": "LegalService",
+            "name": city_page.city_name,
+            "url": city_page.full_url
+        }
+        
+        return schema_data
 
     class Meta:
-        verbose_name = "Услуга"
-        verbose_name_plural = "Услуги"
+        verbose_name = "Страница услуги"
+        verbose_name_plural = "Страницы услуг"

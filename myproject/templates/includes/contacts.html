@@ -29,8 +29,8 @@
             <div>
               <h3 class="font-bold text-gray-900 text-xl mb-2">Адрес офиса</h3>
               <p class="text-gray-700 text-lg">
-                Республика Крым, г. Симферополь, ул. Долгоруковская, д. 5а<br />
-                <span class="text-gray-600 text-base">Напротив турецкого кафе</span>
+                {{ page.region|default:"Республика Крым" }}, г. {{ page.city|default:"Симферополь" }},<br />
+                <span class="text-gray-600 text-base">{{ page.street_address|default:"ул. Долгоруковская, д. 5а"}}</span>
               </p>
               <div class="mt-4">
                 <button class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors">
@@ -150,20 +150,20 @@
   </div>
 </div>
 <script>
-// Загрузка карты при попадании в viewport
-document.addEventListener("DOMContentLoaded", function() {
-  const lazyMaps = document.querySelectorAll('.lazy-map');
-  
-  const mapObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const iframe = entry.target;
-        iframe.src = iframe.dataset.src;
-        mapObserver.unobserve(iframe);
-      }
-    });
-  }, { rootMargin: '100px' }); // Начинаем загружать за 100px до появления
+  // Загрузка карты при попадании в viewport
+  document.addEventListener("DOMContentLoaded", function () {
+    const lazyMaps = document.querySelectorAll('.lazy-map');
 
-  lazyMaps.forEach(map => mapObserver.observe(map));
-});
+    const mapObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const iframe = entry.target;
+          iframe.src = iframe.dataset.src;
+          mapObserver.unobserve(iframe);
+        }
+      });
+    }, { rootMargin: '100px' }); // Начинаем загружать за 100px до появления
+
+    lazyMaps.forEach(map => mapObserver.observe(map));
+  });
 </script>
