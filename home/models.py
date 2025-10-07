@@ -212,7 +212,7 @@ class CityPage(Page):
 
 
 class ServicePage(Page):
-    """Страница услуги - Семейный юрист Симферополь"""
+    """Страница услуги - Семейный юрист Симферополь"""  
     
     # Герой секция для услуги
     hero_title = models.CharField("Заголовок", max_length=255, blank=True)
@@ -221,13 +221,8 @@ class ServicePage(Page):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+',
-        verbose_name="Фон картинки"
+        related_name='+'
     )
-    
-    # Основная информация
-    service_type = models.CharField("Тип услуги", max_length=200, help_text="Например: Семейный юрист, Недвижимость, Наследство")
-    short_description = models.TextField("Краткое описание", max_length=200)
     
     # Стоимость услуги
     price = models.DecimalField("Стоимость", max_digits=10, decimal_places=2, null=True, blank=True, default=1000)
@@ -259,15 +254,12 @@ class ServicePage(Page):
     parent_page_types = ['CityPage']  # Можно создавать только в странице города
     subpage_types = []  # Не может иметь дочерних страниц
 
-    content_panels = Page.content_panels + [        
+    
+
+    content_panels = Page.content_panels + [                                                   
         MultiFieldPanel([
             FieldPanel('hero_image'),
         ], heading="Фото услуги"),
-        
-        MultiFieldPanel([
-            FieldPanel('service_type'),
-            FieldPanel('short_description'),
-        ], heading="Основная информация"),
         
         FieldPanel('description'),
         FieldPanel('content'),
@@ -292,8 +284,6 @@ class ServicePage(Page):
     ]
 
     search_fields = Page.search_fields + [
-        index.SearchField('service_type'),
-        index.SearchField('short_description'),
         index.SearchField('description'),
         index.SearchField('content'),
         index.FilterField('price'),
@@ -313,8 +303,7 @@ class ServicePage(Page):
             "@context": "https://schema.org",
             "@type": "Service",
             "name": self.title,
-            "description": self.short_description or self.description,
-            "serviceType": self.service_type,
+            "description": self.description,
         }
         
         # Добавляем цену, если указана
