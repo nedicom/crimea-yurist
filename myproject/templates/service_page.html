@@ -153,7 +153,29 @@
     "priceRange": "$$"
 }
 </script>
-
+{% if page.depth > 2 %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org", 
+    "@type": "BreadcrumbList",
+    "itemListElement": [ {% with filtered_ancestors=page.get_ancestors|slice:"1:" %} {% for ancestor in filtered_ancestors %}
+        {
+            "@type": "ListItem",
+            "position": {{ forloop.counter }},
+            "name": "{{ ancestor.title }}",
+            "item": "{{ request.scheme }}://{{ request.get_host }}{{ ancestor.url }}"
+        }{% if not forloop.last %},{% endif %} {% endfor %},
+        {
+            "@type": "ListItem",
+            "position": {{ filtered_ancestors|length|add:1 }},
+            "name": "{{ page.title }}",
+            "item": "{{ request.scheme }}://{{ request.get_host }}{{ request.path }}"
+        }
+        {% endwith %}
+    ]
+}
+</script>
+{% endif %}
     <!-- Schema org -->
 
 </body>
