@@ -28,7 +28,7 @@ class HomePage(Page):
     
     phone = models.CharField("Телефон", max_length=20, default="+7 978 910-42-97")
     email = models.EmailField("Email", default="mail@crimea-yurist.ru")
-    map_url = models.URLField("Ссылка на карту", blank=True)
+    map_url = models.URLField("Ссылка на карту", blank=True, default="https://yandex.ru/map-widget/v1/?ll=34.097897%2C44.954033&mode=search&oid=245071578035&ol=biz&z=16.64")
     
     description = RichTextField("Описание услуг", blank=True)
     
@@ -130,7 +130,7 @@ class CityPage(Page):
     
     phone = models.CharField("Телефон", max_length=20,  default="+7 978 910-42-97")
     email = models.EmailField("Email", default="mail@crimea-yurist.ru")
-    map_url = models.URLField("Ссылка на карту", blank=True)
+    map_url = models.URLField("Ссылка на карту", blank=True, default="https://yandex.ru/map-widget/v1/?ll=34.097897%2C44.954033&mode=search&oid=245071578035&ol=biz&z=16.64")
     
     # Описание и контент
     description = RichTextField("Описание услуг в городе", blank=True)
@@ -242,7 +242,7 @@ class ServicePage(Page):
     # Контакты для услуги
     phone = models.CharField("Телефон", max_length=20, default="+7 978 910-42-97")
     email = models.EmailField("Email", default="mail@crimea-yurist.ru")
-    map_url = models.URLField("Ссылка на карту", blank=True)
+    map_url = models.URLField("Ссылка на карту", blank=True, default="https://yandex.ru/map-widget/v1/?ll=34.097897%2C44.954033&mode=search&oid=245071578035&ol=biz&z=16.64")
     
     # Описание и контент
     description = RichTextField("Описание услуги", blank=True)

@@ -32,12 +32,6 @@
                 {{ page.region|default:"Республика Крым" }}, г. {{ page.city|default:"Симферополь" }},<br />
                 <span class="text-gray-600 text-base">{{ page.street_address|default:"ул. Долгоруковская, д. 5а"}}</span>
               </p>
-              <div class="mt-4">
-                <button class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors">
-                  <i class="fas fa-directions"></i>
-                  <span>Построить маршрут</span>
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -53,16 +47,16 @@
               <div class="space-y-3">
                 <div>
                   <p class="text-gray-600 text-sm">Основной телефон</p>
-                  <a href="tel:+79789104297"
+                  <a href="tel:{{ page.phone|default:'+79789104297' }}"
                     class="text-gray-900 text-lg font-semibold hover:text-blue-600 transition-colors">
-                    +7 978 910-42-97
+                    {{ page.phone|default:'+7 978 910-42-97' }}
                   </a>
                 </div>
                 <div>
                   <p class="text-gray-600 text-sm">Для консультаций</p>
-                  <a href="tel:+79789104297"
+                  <a href="tel:{{ page.phone|default:'+79789104297' }}"
                     class="text-gray-900 text-lg font-semibold hover:text-blue-600 transition-colors">
-                    +7 978 910-42-97
+                    {{ page.phone|default:'+7 978 910-42-97' }}
                   </a>
                 </div>
               </div>
@@ -137,8 +131,10 @@
                     position: absolute;
                     top: 14px;
                   ">Юридические услуги в Симферополе</a>
+
+                  
                 <iframe src="about:blank"
-                  data-src="https://yandex.ru/map-widget/v1/?ll=34.097897%2C44.954033&mode=search&oid=245071578035&ol=biz&z=16.64"
+                  src="{{ page.map_url|default:'https://yandex.ru/map-widget/v1/?ll=34.097897%2C44.954033&mode=search&oid=245071578035&ol=biz&z=16.64' }}"
                   class="w-full h-full border-0 rounded-lg lazy-map" loading="lazy" allowfullscreen="true"
                   style="position: relative"></iframe>
               </div>
