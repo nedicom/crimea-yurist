@@ -133,13 +133,23 @@
                   ">Юридические услуги в Симферополе</a>
 
                   
-                <iframe src="about:blank"
-                  src="{{ page.map_url|default:'https://yandex.ru/map-widget/v1/?ll=34.097897%2C44.954033&mode=search&oid=245071578035&ol=biz&z=16.64' }}"
-                  class="w-full h-full border-0 rounded-lg lazy-map" loading="lazy" allowfullscreen="true"
-                  style="position: relative"></iframe>
+                {% if page.map_url %}
+                    <iframe src="{{ page.map_url }}"
+                            class="w-full h-full border-0 rounded-lg"
+                            loading="lazy"
+                            allowfullscreen>
+                    </iframe>
+                {% else %}
+                    <iframe src="https://yandex.ru/map-widget/v1/?ll=34.097897%2C44.954033&mode=search&oid=245071578035&ol=biz&z=16.64"
+                            class="w-full h-full border-0 rounded-lg"
+                            loading="lazy"
+                            allowfullscreen>
+                    </iframe>
+                {% endif %}
               </div>
             </div>
           </div>
+          
         </div>
       </div>
     </div>
