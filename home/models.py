@@ -216,9 +216,6 @@ class CityPage(Page):
 class ServicePage(Page):
     """Страница услуги - Семейный юрист Симферополь"""
     
-    # Основная информация об услуге
-    service_name = models.CharField("Название услуги", max_length=200, help_text="Например: Семейный юрист Симферополь")
-    
     # Герой секция для услуги
     hero_title = models.CharField("Заголовок", max_length=255, blank=True)
     hero_image = models.ForeignKey(
@@ -264,9 +261,7 @@ class ServicePage(Page):
     parent_page_types = ['CityPage']  # Можно создавать только в странице города
     subpage_types = []  # Не может иметь дочерних страниц
 
-    content_panels = Page.content_panels + [
-        FieldPanel('service_name'),
-        
+    content_panels = Page.content_panels + [        
         MultiFieldPanel([
             FieldPanel('hero_title'),
             FieldPanel('hero_image'),
