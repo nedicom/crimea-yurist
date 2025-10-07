@@ -6,6 +6,7 @@ env/
 # Database
 db.sqlite3
 *.db
+echo "home/migrations/" >> .gitignore
 
 # Python cache
 __pycache__/
