@@ -38,9 +38,13 @@ class HomePage(Page):
         ('image', ImageChooserBlock(icon="image", verbose_name="Картинка")),
     ], use_json_field=True, blank=True, verbose_name="Контент")
     
-    @property
-    def country(self):
-        return "Россия"
+    country = models.CharField(
+        "Страна", 
+        max_length=100, 
+        default="Россия",
+        blank=True,  # добавьте это
+        verbose_name="Страна"
+    )
 
     template = "home_page.html"
 
@@ -137,9 +141,13 @@ class CityPage(Page):
     email = models.EmailField("Email", default="mail@crimea-yurist.ru")
     map_url = models.URLField("Ссылка на карту", blank=True)
     
-    @property
-    def country(self):
-        return "Россия"
+    country = models.CharField(
+        "Страна", 
+        max_length=100, 
+        default="Россия",
+        blank=True,  # добавьте это
+        verbose_name="Страна"
+    )
     
     # Описание и контент
     description = RichTextField("Описание услуг в городе", blank=True)
@@ -242,9 +250,13 @@ class ServicePage(Page):
     service_type = models.CharField("Тип услуги", max_length=200, help_text="Например: Семейный юрист, Недвижимость, Наследство")
     short_description = models.TextField("Краткое описание", max_length=200)
     
-    @property
-    def country(self):
-        return "Россия"
+    country = models.CharField(
+        "Страна", 
+        max_length=100, 
+        default="Россия",
+        blank=True,  # добавьте это
+        verbose_name="Страна"
+    )
     
     # Стоимость услуги
     price = models.DecimalField("Стоимость", max_digits=10, decimal_places=2, null=True, blank=True, default="1000")
