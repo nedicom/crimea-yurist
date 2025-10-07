@@ -118,21 +118,13 @@
             <div class="w-full h-full min-h-[400px] bg-gray-200 p-4">
               <div class="relative w-full h-full">
                 <a href="https://yandex.ru/maps/org/pravovoy_ekspert/245071578035/?utm_medium=mapframe&utm_source=maps"
+                  class="text-base px-4 py-3 inline-block min-h-[44px] bg-gray-700 rounded"
                   style="
                     color: #eee;
                     font-size: 12px;
                     position: absolute;
                     top: 0px;
-                  ">Правовой Эксперт</a><a
-                  href="https://yandex.ru/maps/146/simferopol/category/legal_services/184105630/?utm_medium=mapframe&utm_source=maps"
-                  style="
-                    color: #eee;
-                    font-size: 12px;
-                    position: absolute;
-                    top: 14px;
-                  ">Юридические услуги в Симферополе</a>
-
-                  
+                  ">{{ page.title }}</a>                 
                 {% if page.map_url %}
                     <iframe src="{{ page.map_url }}"
                             class="w-full h-full border-0 rounded-lg"
@@ -143,6 +135,7 @@
                     <iframe src="https://yandex.ru/map-widget/v1/?ll=34.097897%2C44.954033&mode=search&oid=245071578035&ol=biz&z=16.64"
                             class="w-full h-full border-0 rounded-lg"
                             loading="lazy"
+                            title="Карта с расположением офиса юриста"
                             allowfullscreen>
                     </iframe>
                 {% endif %}
