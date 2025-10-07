@@ -1,0 +1,35 @@
+{% if page.depth > 2 %}
+<nav class="flex items-center space-x-2 text-sm text-gray-600 p-2" aria-label="Хлебные крошки">
+    <!-- Главная ссылка -->
+    <a href="/" class="flex items-center hover:text-blue-600 transition-colors duration-200">
+        <svg class="w-4 h-4 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+        </svg>
+        Главная
+    </a>
+    
+    {% for ancestor in page.get_ancestors %}
+        {% if ancestor.depth > 2 %}
+            <!-- Разделитель -->
+            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+            
+            <!-- Промежуточная ссылка -->
+            <a href="{{ ancestor.url }}" class="hover:text-blue-600 transition-colors duration-200 truncate max-w-xs">
+                {{ ancestor.title }}
+            </a>
+        {% endif %}
+    {% endfor %}
+    
+    <!-- Разделитель перед текущей страницей -->
+    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+    </svg>
+    
+    <!-- Текущая страница -->
+    <span class="text-gray-900 font-medium truncate max-w-xs" aria-current="page">
+        {{ page.title }}
+    </span>
+</nav>
+{% endif %}
