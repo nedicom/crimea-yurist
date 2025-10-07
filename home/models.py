@@ -295,7 +295,6 @@ class ServicePage(Page):
     ]
 
     search_fields = Page.search_fields + [
-        index.SearchField('service_name'),
         index.SearchField('service_type'),
         index.SearchField('short_description'),
         index.SearchField('description'),
@@ -316,7 +315,7 @@ class ServicePage(Page):
         schema_data = {
             "@context": "https://schema.org",
             "@type": "Service",
-            "name": self.service_name or self.title,
+            "name": self.title,
             "description": self.short_description or self.description,
             "serviceType": self.service_type,
         }
