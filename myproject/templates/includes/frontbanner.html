@@ -10,18 +10,19 @@
 
         <!-- SEO-заголовок -->
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-          {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title}}{% endif %}
+          {{ page.title }}
           <span class="text-yellow-400">для физических лиц и бизнеса</span>
         </h1>
 
         <!-- SEO-описание -->
         <p class="text-xl text-blue-100 leading-relaxed">
-          {% if page.search_description %} {{ page.search_description }}
-          {% else%}
-          Юридическая компания в Крыму с 2014 года. Услуги адвоката по
-          гражданским, арбитражным и уголовным делам. Бесплатная консультация
-          юриста в Симферополе, Севастополе, Ялте и других городах Крыма.
-          {% endif %}
+            {% if page.description %} 
+                {{ page.description|safe  }}
+            {% else %}
+                Юридическая компания в Крыму с 2014 года. Услуги адвоката по
+                гражданским, арбитражным и уголовным делам. Бесплатная консультация
+                юриста в Симферополе, Севастополе, Ялте и других городах Крыма.
+            {% endif %}
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 pt-4">

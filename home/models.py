@@ -47,9 +47,8 @@ class HomePage(Page):
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([
-            FieldPanel('hero_title'),
             FieldPanel('hero_image'),
-        ], heading="Герой Фото юриста"),
+        ], heading="Фото услуги"),
         
         FieldPanel('description'),
         FieldPanel('content'),
@@ -152,9 +151,8 @@ class CityPage(Page):
         FieldPanel('city_name'),
         
         MultiFieldPanel([
-            FieldPanel('hero_title'),
             FieldPanel('hero_image'),
-        ], heading="Герой секция"),
+        ], heading="Фото услуги"),
         
         FieldPanel('description'),
         FieldPanel('content'),
@@ -263,9 +261,8 @@ class ServicePage(Page):
 
     content_panels = Page.content_panels + [        
         MultiFieldPanel([
-            FieldPanel('hero_title'),
             FieldPanel('hero_image'),
-        ], heading="Герой секция"),
+        ], heading="Фото услуги"),
         
         MultiFieldPanel([
             FieldPanel('service_type'),
