@@ -39,11 +39,10 @@ class HomePage(Page):
     ], use_json_field=True, blank=True, verbose_name="Контент")
     
     country = models.CharField(
-        "Страна", 
+        "Страна",  # ← это уже verbose_name, уберите дублирование
         max_length=100, 
         default="Россия",
-        blank=True,  # добавьте это
-        verbose_name="Страна"
+        blank=True
     )
 
     template = "home_page.html"
@@ -142,11 +141,10 @@ class CityPage(Page):
     map_url = models.URLField("Ссылка на карту", blank=True)
     
     country = models.CharField(
-        "Страна", 
+        "Страна",  # ← это уже verbose_name, уберите дублирование
         max_length=100, 
         default="Россия",
-        blank=True,  # добавьте это
-        verbose_name="Страна"
+        blank=True
     )
     
     # Описание и контент
@@ -251,11 +249,10 @@ class ServicePage(Page):
     short_description = models.TextField("Краткое описание", max_length=200)
     
     country = models.CharField(
-        "Страна", 
+        "Страна",  # ← это уже verbose_name, уберите дублирование
         max_length=100, 
         default="Россия",
-        blank=True,  # добавьте это
-        verbose_name="Страна"
+        blank=True
     )
     
     # Стоимость услуги
