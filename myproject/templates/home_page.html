@@ -4,7 +4,7 @@
 <html lang="ru" class="scroll-smooth">
     {# head #}
     {% include "includes/head.html" %}
-    
+
 <body class="{% block body_class %}{% endblock %}">
     {% wagtailuserbar %}
 
@@ -45,18 +45,9 @@
     {# Override this in templates to add extra javascript #}
     {% endblock %}
 
+    {# Yandex metrika #}
+    {% include "includes/yandex.html" %}
 
-    <!-- Yandex.Metrika counter -->
-    <script>
-        // Загрузка метрики с задержкой
-        setTimeout(function () {
-            var script = document.createElement('script');
-            script.src = "{% static 'js/metrika.js' %}";
-            script.async = true;
-            document.body.appendChild(script);
-        }, 10000); // 10 секунд
-    </script>
-    <!-- /Yandex.Metrika counter -->
 
     <script type="application/ld+json">
 {

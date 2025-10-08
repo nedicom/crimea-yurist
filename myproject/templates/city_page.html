@@ -46,17 +46,8 @@
     {% endblock %}
 
 
-    <!-- Yandex.Metrika counter -->
-    <script>
-        // Загрузка метрики с задержкой
-        setTimeout(function () {
-            var script = document.createElement('script');
-            script.src = "{% static 'js/metrika.js' %}";
-            script.async = true;
-            document.body.appendChild(script);
-        }, 10000); // 10 секунд
-    </script>
-    <!-- /Yandex.Metrika counter -->
+    {# Yandex metrika #}
+    {% include "includes/yandex.html" %}
 
     <script type="application/ld+json">
 {
