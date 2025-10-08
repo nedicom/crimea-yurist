@@ -6,7 +6,7 @@
             var script = document.createElement('script');
             script.src = "{% static 'js/metrika.js' %}";
             script.async = true;
-            document.body.appendChild(script);
+            document.head.appendChild(script);
         }, 5000); // 5 секунд
     </script>
     <!-- /Yandex.Metrika counter -->
