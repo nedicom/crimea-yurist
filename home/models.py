@@ -369,6 +369,8 @@ class PracticeGalleryPage(Page):
     
     description = RichTextField("Описание галереи", blank=True)
     
+    parent_page_types = ['home.HomePage', 'wagtailcore.Page']
+    
     content_panels = Page.content_panels + [
         FieldPanel('description'),
     ]
