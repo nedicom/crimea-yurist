@@ -43,7 +43,7 @@ class HomePage(Page):
 
     # Настройки страницы
     parent_page_types = []  # Только в корне сайта
-    subpage_types = ['CityPage', 'home.HomePage', 'wagtailcore.Page'] # Можно создавать только страницы городов
+    subpage_types = ['CityPage', 'home.HomePage', 'wagtailcore.Page', 'PracticeGalleryPage']
     max_count = 1  # Только одна главная страница
 
     content_panels = Page.content_panels + [
