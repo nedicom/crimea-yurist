@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <!-- Заголовок и мета-информация -->
+    <div class="mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{{ page.case_title }}</h1>
+        
+        <div class="flex flex-wrap gap-2 mb-4">
+            {% if page.case_type %}
+            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                {{ page.case_type }}
+            </span>
+            {% endif %}
+            
+            {% if page.status %}
+            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+                {{ page.status }}
+            </span>
+            {% endif %}
+            
+            {% if page.court %}
+            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">
+                {{ page.court }}
+            </span>
+            {% endif %}
+        </div>
+
+        <!-- Даты -->
+        <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+            {% if page.start_date %}
+            <span>Начало: {{ page.start_date }}</span>
+            {% endif %}
+            
+            {% if page.end_date %}
+            <span>Завершение: {{ page.end_date }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Описание дела -->
+    {% if page.case_description %}
+    <div class="prose max-w-none mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Описание дела</h2>
+        {{ page.case_description|richtext }}
+    </div>
+    {% endif %}
+
+    <!-- Проблема и решение -->
+    <div class="grid md:grid-cols-2 gap-8 mb-8">
+        {% if page.challenge %}
+        <div class="bg-red-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-red-800 mb-3">Проблема</h3>
+            <div class="prose prose-red">
+                {{ page.challenge|richtext }}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if page.solution %}
+        <div class="bg-green-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-green-800 mb-3">Решение</h3>
+            <div class="prose prose-green">
+                {{ page.solution|richtext }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Галерея изображений -->
+    {% if page.gallery_images %}
+    <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Галерея</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for image_block in page.gallery_images %}
+                {% image image_block.value width-400 as img %}
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-48 object-cover">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Отзывы клиентов -->
+    {% if page.reviews %}
+    <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-6">Отзывы клиентов</h2>
+        <div class="space-y-6">
+            {% for review in page.reviews %}
+                {% if review.is_published %}
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <!-- Заголовок и рейтинг -->
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-semibold text-gray-900">{{ review.review_title }}</h3>
+                        <div class="flex items-center gap-1">
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= review.rating %}
+                                    <span class="text-yellow-400">★</span>
+                                {% else %}
+                                    <span class="text-gray-300">★</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Текст отзыва -->
+                    <div class="prose max-w-none mb-4">
+                        {{ review.review_text|richtext }}
+                    </div>
+
+                    <!-- Информация о клиенте -->
+                    <div class="flex justify-between items-center text-sm text-gray-600">
+                        <div>
+                            <span class="font-semibold">{{ review.client_name }}</span>
+                            {% if review.client_initials %}
+                                <span>({{ review.client_initials }})</span>
+                            {% endif %}
+                            {% if review.case_type_review %}
+                                <span class="ml-2">• {{ review.case_type_review }}</span>
+                            {% endif %}
+                        </div>
+                        <span>{{ review.review_date }}</span>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Кнопка назад -->
+    <div class="text-center mt-8">
+        <a href="{{ page.get_parent.url }}" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors">
+            ← Вернуться к галерее практики
+        </a>
+    </div>
+</div>
+{% endblock %}

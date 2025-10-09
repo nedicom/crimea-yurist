@@ -2,8 +2,8 @@
 
 <!DOCTYPE html>
 <html lang="ru" class="scroll-smooth">
-    {# head #}
-    {% include "includes/head.html" %}
+{# head #}
+{% include "includes/head.html" %}
 
 <body class="{% block body_class %}{% endblock %}">
     {% wagtailuserbar %}
@@ -17,20 +17,23 @@
     {# Banner #}
     {% include "includes/frontbanner.html" %}
 
-    {# prices #}
-    {% include "includes/tableprices.html" %}
-
-    {# prices #}
-    {% include "includes/prices.html" %}
-
     {# description #}
     {% include "includes/description.html" %}
+
+    {# tableprices #}
+    {% include "includes/tableprices.html" %}
 
     {# contacts #}
     {% include "includes/contacts.html" %}
 
     {# reviews #}
     {% include "includes/reviews.html" %}
+
+    {# sitereviews #}
+    {% include "includes/sitereviews.html" %}
+
+    {# prices #}
+    {% include "includes/prices.html" %}
 
     {# links #}
     {% show_nested_menu %}
@@ -45,7 +48,7 @@
     {# Override this in templates to add extra javascript #}
     {% endblock %}
 
- <!-- Yandex.Metrika counter -->
+    <!-- Yandex.Metrika counter -->
     <script>
         // Загрузка метрики с задержкой
         setTimeout(function () {
@@ -55,6 +58,9 @@
             document.head.appendChild(script);
         }, 5000); // 5 секунд
     </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/104280599" style="position:absolute;left:-9999px" alt=""></div>
+    </noscript>
     <!-- /Yandex.Metrika counter -->
 
 

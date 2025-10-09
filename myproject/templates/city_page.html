@@ -46,8 +46,20 @@
     {% endblock %}
 
 
-    {# Yandex metrika #}
-    {% include "includes/yandex.html" %}
+    <!-- Yandex.Metrika counter -->
+    <script>
+        // Загрузка метрики с задержкой
+        setTimeout(function () {
+            var script = document.createElement('script');
+            script.src = "{% static 'js/metrika.js' %}";
+            script.async = true;
+            document.head.appendChild(script);
+        }, 5000); // 5 секунд
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/104280599" style="position:absolute;left:-9999px" alt=""></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
     
     {# GA #}
     {% include "includes/google.html" %}

@@ -2,10 +2,11 @@ from django.db import models
 from wagtail.models import Page
 from wagtail import blocks
 from wagtail.fields import StreamField, RichTextField
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.search import index
-from wagtail.images.models import Image
+from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
 
 
 class HomePage(Page):
@@ -361,3 +362,148 @@ class ServicePage(Page):
     class Meta:
         verbose_name = "Страница услуги"
         verbose_name_plural = "Страницы услуг"
+        
+        
+class PracticeGalleryPage(Page):
+    """Страница-галерея юридической практики"""
+    
+    description = RichTextField("Описание галереи", blank=True)
+    
+    content_panels = Page.content_panels + [
+        FieldPanel('description'),
+    ]
+    
+    subpage_types = ['LegalPracticePage']
+    template = "practice_gallery_page.html"
+    
+    class Meta:
+        verbose_name = "Галерея практики"
+        verbose_name_plural = "Галереи практики"
+
+
+class LegalPracticePage(Page):
+    """Страница юридической практики (кейса)"""
+    
+    # Основная информация о деле
+    case_title = models.CharField("Название дела", max_length=255)
+    case_type = models.CharField("Тип дела", max_length=100, blank=True, 
+                                help_text="Например: Гражданское дело, Уголовное дело и т.д.")
+    
+    # Детали дела
+    case_description = RichTextField("Описание дела", blank=True)
+    challenge = RichTextField("Проблема/Задача", blank=True, help_text="С какой проблемой обратился клиент")
+    solution = RichTextField("Решение/Результат", blank=True, help_text="Как была решена проблема")
+    
+    # Даты
+    start_date = models.DateField("Дата начала дела", null=True, blank=True)
+    end_date = models.DateField("Дата завершения дела", null=True, blank=True)
+    
+    # Статус дела
+    status = models.CharField("Статус дела", max_length=100, blank=True,
+                             help_text="Например: Выиграно, Урегулировано, В процессе и т.д.")
+    
+    # Суд/орган рассмотрения
+    court = models.CharField("Суд/Орган", max_length=255, blank=True)
+    
+    # Галерея изображений
+    gallery_images = StreamField([
+        ('image', ImageChooserBlock(icon="image", verbose_name="Изображение")),
+    ], use_json_field=True, blank=True, verbose_name="Галерея изображений")
+
+    content_panels = Page.content_panels + [
+        FieldPanel('case_title'),
+        FieldPanel('case_type'),
+        FieldPanel('case_description'),
+        
+        MultiFieldPanel([
+            FieldPanel('start_date'),
+            FieldPanel('end_date'),
+            FieldPanel('status'),
+            FieldPanel('court'),
+        ], heading="Детали дела"),
+        
+        FieldPanel('challenge'),
+        FieldPanel('solution'),
+        FieldPanel('gallery_images'),
+        
+        InlinePanel('client_reviews', label="Отзывы клиентов"),
+    ]
+    
+    search_fields = Page.search_fields + [
+        index.SearchField('case_title'),
+        index.SearchField('case_description'),
+        index.SearchField('challenge'),
+        index.SearchField('solution'),
+        index.SearchField('case_type'),
+        index.SearchField('status'),
+    ]
+    
+    parent_page_types = ['PracticeGalleryPage']
+    subpage_types = []
+    
+    template = "legal_practice_page.html"
+    
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['reviews'] = self.client_reviews.all()
+        return context
+    
+    class Meta:
+        verbose_name = "Юридическая практика"
+        verbose_name_plural = "Юридическая практика"
+
+
+class ClientReview(ClusterableModel):
+    """Отзыв клиента о юридической услуге"""
+    
+    page = ParentalKey(
+        LegalPracticePage,
+        on_delete=models.CASCADE,
+        related_name='client_reviews',
+        verbose_name="Страница практики"
+    )
+    
+    # Информация о клиенте
+    client_name = models.CharField("ФИО клиента", max_length=255)
+    client_initials = models.CharField("Инициалы", max_length=10, blank=True)
+    
+    # Отзыв
+    review_title = models.CharField("Заголовок отзыва", max_length=255)
+    review_text = RichTextField("Текст отзыва")
+    
+    # Оценка
+    RATING_CHOICES = [
+        (1, '1 звезда'),
+        (2, '2 звезды'),
+        (3, '3 звезды'),
+        (4, '4 звезды'),
+        (5, '5 звезд'),
+    ]
+    rating = models.IntegerField("Оценка", choices=RATING_CHOICES, default=5)
+    
+    # Тип дела для отзыва
+    case_type_review = models.CharField("Тип дела", max_length=100, blank=True)
+    
+    # Публикация
+    is_published = models.BooleanField("Опубликован", default=True)
+    
+    # Дата отзыва
+    review_date = models.DateField("Дата отзыва", auto_now_add=True)
+
+    panels = [
+        FieldPanel('client_name'),
+        FieldPanel('client_initials'),
+        FieldPanel('review_title'),
+        FieldPanel('review_text'),
+        FieldPanel('rating'),
+        FieldPanel('case_type_review'),
+        FieldPanel('is_published'),
+    ]
+    
+    def __str__(self):
+        return f"{self.client_name} - {self.rating}⭐"
+    
+    class Meta:
+        verbose_name = "Отзыв клиента"
+        verbose_name_plural = "Отзывы клиентов"
+        ordering = ['-review_date']
