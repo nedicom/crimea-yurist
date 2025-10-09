@@ -3,7 +3,10 @@
 <footer class="bg-dark text-light mt-5 py-4">
   <div class="container flex justify-center gap-5">
     <p>&copy; 2025 </p>
-    <p>    {% wagtail_site as current_site %}    {{ current_site.site_name }}</p>
+    <p> {% wagtail_site as current_site %} {{ current_site.site_name }}</p>
     <p>ИНН: 910209968612</p>
+    <p> <a
+        class="text-gray-700 hover:text-blue-600 py-2 transition-colors{% if request.path == '/politika-personalnyh-dannyh/' %} text-blue-600 font-medium{% endif %}"
+        href="/politika-personalnyh-dannyh/">Политика персональных данных</a></p>
   </div>
 </footer>
