@@ -43,7 +43,7 @@ class HomePage(Page):
 
     # Настройки страницы
     parent_page_types = []  # Только в корне сайта
-    subpage_types = ['CityPage', 'PracticeGalleryPage']
+    subpage_types = ['CityPage', 'PracticeGalleryPage', 'ContactsPage', 'UslugiPage', 'PricePage', 'PolicyPage']
     max_count = 1  # Только одна главная страница
 
     content_panels = Page.content_panels + [
@@ -363,7 +363,75 @@ class ServicePage(Page):
         verbose_name = "Страница услуги"
         verbose_name_plural = "Страницы услуг"
         
+    class ContactsPage(Page):
+        """Страница контактов"""
         
+        description = RichTextField("Описание страницы контактов", blank=True)
+        
+        parent_page_types = ['home.HomePage', 'wagtailcore.Page']
+        
+        content_panels = Page.content_panels + [
+            FieldPanel('description'),
+        ]
+        
+        template = "contacts_page.html"
+        
+        class Meta:
+            verbose_name = "Страница контактов"
+            verbose_name_plural = "Страница контактов"
+            
+    class UslugiPage(Page):
+        """Страница услуг"""
+        
+        description = RichTextField("Описание страницы услуг", blank=True)
+        
+        parent_page_types = ['home.HomePage', 'wagtailcore.Page']
+        
+        content_panels = Page.content_panels + [
+            FieldPanel('description'),
+        ]
+        
+        template = "uslugi_page.html"
+        
+        class Meta:
+            verbose_name = "Страница услуг"
+            verbose_name_plural = "Страница услуг"
+            
+            
+    class PricePage(Page):
+        """Страница цен"""
+        
+        description = RichTextField("Описание страницы цен", blank=True)
+        
+        parent_page_types = ['home.HomePage', 'wagtailcore.Page']
+        
+        content_panels = Page.content_panels + [
+            FieldPanel('description'),
+        ]
+        
+        template = "price_page.html"
+        
+        class Meta:
+            verbose_name = "Страница цен"
+            verbose_name_plural = "Страница цен"
+            
+    class PolicyPage(Page):
+        """Страница политики"""
+        
+        description = RichTextField("Описание страницы политики", blank=True)
+        
+        parent_page_types = ['home.HomePage', 'wagtailcore.Page']
+        
+        content_panels = Page.content_panels + [
+            FieldPanel('description'),
+        ]
+        
+        template = "policy_page.html"
+        
+        class Meta:
+            verbose_name = "Страница политики"
+            verbose_name_plural = "Страница политики"
+               
 class PracticeGalleryPage(Page):
     """Страница-галерея юридической практики"""
     
