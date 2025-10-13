@@ -107,16 +107,7 @@
             "description": "Профессиональные юридические услуги в Крыму. Семейное право, гражданские споры, представительство в судах.",
             "url": "{{ request.scheme }}://{{ request.get_host }}",
             "logo": "{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo.jpg' %}",
-            "telephone": "{{ page.phone|default:'+7 978 910-42-97' }}",
-            "email": "mail@crimea-yurist.ru",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "ул. Долгоруковская, д. 5а",
-                "addressLocality": "Симферополь",
-                "addressRegion": "Республика Крым",
-                "postalCode": "295000",
-                "addressCountry": "RU"
-            },
+            "image": "{% if page.hero_image %}https://crimea-yurist.ru{{ page.hero_image.file.url }}{% else %}https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80{% endif %}",
             "founder": {
                 "@type": "Person",
                 "name": "Добренький Андрей Дмитриевич",
