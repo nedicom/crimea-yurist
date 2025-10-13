@@ -1,20 +1,21 @@
-{% load wagtailcore_tags %} 
+{% load wagtailcore_tags %}
 <style>
-  /* Стили для окна согласия на куки */
+/* Стили для окна согласия на куки с улучшенной контрастностью */
 .cookie-consent {
     position: fixed;
     bottom: 20px;
     left: 20px;
     right: 20px;
     max-width: 400px;
-    background: #2c3e50;
-    color: #ecf0f1;
+    background: #1a365d; /* Темно-синий вместо серого - лучшее соотношение с белым текстом */
+    color: #ffffff; /* Чистый белый для максимального контраста */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     z-index: 10000;
     font-family: 'Arial', sans-serif;
-    display: none; /* Скрыто по умолчанию */
+    display: none;
+    border: 1px solid #2d3748; /* Добавляем границу для лучшего отделения от фона */
 }
 
 .cookie-consent__content {
@@ -26,22 +27,26 @@
 .cookie-consent__text h3 {
     margin: 0 0 8px 0;
     font-size: 16px;
-    color: #3498db;
+    color: #63b3ed; /* Более светлый синий для заголовка */
+    font-weight: 600;
 }
 
 .cookie-consent__text p {
     margin: 0;
     font-size: 14px;
-    line-height: 1.4;
+    line-height: 1.5;
+    color: #e2e8f0; /* Светло-серый для основного текста */
 }
 
 .cookie-consent__text a {
-    color: #3498db;
+    color: #90cdf4; /* Более контрастный синий для ссылок */
     text-decoration: underline;
+    font-weight: 500;
 }
 
 .cookie-consent__text a:hover {
-    color: #2980b9;
+    color: #63b3ed;
+    text-decoration: none;
 }
 
 .cookie-consent__actions {
@@ -51,35 +56,45 @@
 }
 
 .cookie-consent__btn {
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0.3s ease;
     flex: 1;
     min-width: 120px;
+    border: 2px solid transparent; /* Для лучшей видимости фокуса */
 }
 
 .cookie-consent__btn--accept {
-    background: #27ae60;
+    background: #2d7d46; /* Более темный зеленый для лучшего контраста */
     color: white;
 }
 
 .cookie-consent__btn--accept:hover {
-    background: #219a52;
+    background: #225e37;
+}
+
+.cookie-consent__btn--accept:focus {
+    outline: 2px solid #90cdf4;
+    outline-offset: 2px;
 }
 
 .cookie-consent__btn--reject {
-    background: transparent;
-    color: #bdc3c7;
-    border: 1px solid #7f8c8d;
+    background: #4a5568; /* Более темный серый */
+    color: white;
+    border: 2px solid #718096;
 }
 
 .cookie-consent__btn--reject:hover {
-    background: #34495e;
-    color: #ecf0f1;
+    background: #2d3748;
+}
+
+.cookie-consent__btn--reject:focus {
+    outline: 2px solid #90cdf4;
+    outline-offset: 2px;
 }
 
 /* Адаптивность для мобильных устройств */
@@ -97,6 +112,23 @@
     
     .cookie-consent__btn {
         flex: none;
+    }
+}
+
+/* Стили для высококонтрастного режима */
+@media (prefers-contrast: high) {
+    .cookie-consent {
+        background: #000000;
+        border: 2px solid #ffffff;
+    }
+    
+    .cookie-consent__btn--accept {
+        background: #006600;
+    }
+    
+    .cookie-consent__btn--reject {
+        background: #660000;
+        border-color: #ffffff;
     }
 }
 </style>
@@ -153,7 +185,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Проверяем, было ли уже дано согласие
     if (!getCookie('cookieConsent')) {
-        // Показываем окно с задержкой для лучшего UX
         setTimeout(() => {
             cookieConsent.style.display = 'block';
         }, 1000);
@@ -163,8 +194,6 @@ document.addEventListener('DOMContentLoaded', function() {
     cookieAccept.addEventListener('click', function() {
         setCookie('cookieConsent', 'accepted', 365);
         cookieConsent.style.display = 'none';
-        
-        // Здесь можно инициализировать аналитику (Google Analytics, Яндекс.Метрика и т.д.)
         initializeAnalytics();
     });
 
@@ -172,8 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
     cookieReject.addEventListener('click', function() {
         setCookie('cookieConsent', 'rejected', 30);
         cookieConsent.style.display = 'none';
-        
-        // Отключаем необязательные cookies
         disableOptionalCookies();
     });
 
@@ -197,13 +224,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function initializeAnalytics() {
-        // Разместите здесь код инициализации вашей аналитики
-        // Например: Google Analytics, Яндекс.Метрика и т.д.
         console.log('Analytics initialized - cookies accepted');
     }
 
     function disableOptionalCookies() {
-        // Удаляем необязательные cookies если они есть
         console.log('Optional cookies disabled');
     }
 });
