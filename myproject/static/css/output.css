@@ -1455,6 +1455,11 @@
       line-height: var(--tw-leading, var(--text-lg--line-height));
     }
   }
+  .xl\:gap-4 {
+    @media (width >= 80rem) {
+      gap: calc(var(--spacing) * 4);
+    }
+  }
   .xl\:text-lg {
     @media (width >= 80rem) {
       font-size: var(--text-lg);
