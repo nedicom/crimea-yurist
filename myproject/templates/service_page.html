@@ -64,76 +64,74 @@
     {# GA #}
     {% include "includes/google.html" %}
 
-    <script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Правовой эксперт Добренький Андрей",
-    "description": "{{ page.search_description|default:'Юридические услуги в Крыму' }}",
-    "url": "{{ request.scheme }}://{{ request.get_host }}",
-    "logo": "{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo.jpg' %}",
-    "telephone": "{{ page.phone|default:'+7 978 910-42-97' }}",
-    "email": "mail@crimea-yurist.ru",
-    "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "{{ page.street_address|default:'ул. Долгоруковская, д. 5а' }}",
-        "addressLocality": "{{ page.city|default:'Симферополь' }}",
-        "addressRegion": "{{ page.region|default:'Республика Крым' }}",
-        "postalCode": "{{ page.postal_code|default:'295000' }}",
-        "addressCountry": "RU"
-    },
-    "sameAs": [
-        "https://vk.com/lawyerdobrenkiy"
-    ],
-    "founder": {
-        "@type": "Person",
-        "name": "Добренький Андрей Дмитриевич"
-    }
-}
-</script>
+
 
     <script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "LegalService",
-    "name": "{% if page.title %}{{ page.title }}{% else %}Юрист Крым{% endif %}",
-    "description": "{{ page.search_description|default:'Юридические услуги в Крыму' }}",
-    "url": "{{ request.scheme }}://{{ request.get_host }}",
-    "telephone": "{{ page.phone|default:'+7 978 910-42-97' }}",
-    "email": "mail@crimea-yurist.ru",
-    "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "{{ page.street_address|default:'ул. Долгоруковская, д. 5а' }}",
-        "addressLocality": "{{ page.city|default:'Симферополь' }}",
-        "addressRegion": "{{ page.region|default:'Республика Крым' }}",
-        "postalCode": "{{ page.postal_code|default:'295000' }}",
-        "addressCountry": "RU"
-    },
-    "areaServed": {
-        "@type": "State",
-        "name": "{{ page.region|default:'Республика Крым' }}"
-    },
-    "openingHoursSpecification": [
-        {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-            "opens": "09:00",
-            "closes": "21:00"
-        },
-        {
-            "@type": "OpeningHoursSpecification", 
-            "dayOfWeek": ["Saturday", "Sunday"],
-            "opens": "09:00",
-            "closes": "21:00"
-        }
-    ],
+    {
+            "@context": "https://schema.org",
+            "@type": "LegalService",
+            "name": "{% if page.title %}{{ page.title }}{% else %}Юрист Крым{% endif %}",
+            "description": "{{ page.search_description|default:'Юридические услуги в Крыму' }}",
+            "url": "{{ request.scheme }}://{{ request.get_host }}",
+            "telephone": "{{ page.phone|default:'+7 978 910-42-97' }}",
+            "email": "mail@crimea-yurist.ru",
+            "image": "{% if page.hero_image %}https://crimea-yurist.ru{{ page.hero_image.file.url }}{% else %}https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80{% endif %}",
+            "logo": "{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo.jpg' %}",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "{{ page.street_address|default:'ул. Долгоруковская, д. 5а' }}",
+                "addressLocality": "{{ page.city|default:'Симферополь' }}",
+                "addressRegion": "{{ page.region|default:'Республика Крым' }}",
+                "postalCode": "{{ page.postal_code|default:'295000' }}",
+                "addressCountry": "RU"
+            },
+            "areaServed": {
+                "@type": "State",
+                "name": "{{ page.region|default:'Республика Крым' }}"
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                    "opens": "09:00",
+                    "closes": "21:00"
+                },
+                {
+                    "@type": "OpeningHoursSpecification", 
+                    "dayOfWeek": ["Saturday", "Sunday"],
+                    "opens": "09:00",
+                    "closes": "21:00"
+                }
+            ],
     "parentOrganization": {
-        "@type": "Organization",
-        "name": "{% if page.title %}{{ page.title }}{% else %}Юрист Крым{% endif %}"
-    },
-    "priceRange": "$$"
-}
-</script>
+            "@type": "Organization",
+            "name": "Правовой эксперт Добренький Андрей",
+            "description": "Профессиональные юридические услуги в Крыму. Семейное право, гражданские споры, представительство в судах.",
+            "url": "{{ request.scheme }}://{{ request.get_host }}",
+            "logo": "{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo.jpg' %}",
+            "telephone": "{{ page.phone|default:'+7 978 910-42-97' }}",
+            "email": "mail@crimea-yurist.ru",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "ул. Долгоруковская, д. 5а",
+                "addressLocality": "Симферополь",
+                "addressRegion": "Республика Крым",
+                "postalCode": "295000",
+                "addressCountry": "RU"
+            },
+            "founder": {
+                "@type": "Person",
+                "name": "Добренький Андрей Дмитриевич",
+                "jobTitle": "Юрист",
+                "image": "{% if page.hero_image %}https://crimea-yurist.ru{{ page.hero_image.file.url }}{% else %}https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80{% endif %}"
+            },
+            "sameAs": [
+                "https://vk.com/lawyerdobrenkiy"
+            ]
+        },
+        "priceRange": "$$"
+        }
+    </script>
 {% if page.depth > 2 %}
 <script type="application/ld+json">
 {
