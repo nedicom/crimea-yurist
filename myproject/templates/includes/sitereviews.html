@@ -1,4 +1,7 @@
 {% load review_tags %}
+{% get_reviews as reviews %}
+
+{% with reviews_count=reviews|length %}
 
 <!-- JSON-LD разметка для отзывов -->
 <script type="application/ld+json">
@@ -8,8 +11,8 @@
     "name": "Юридические услуги",
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "{{ reviews|length }}"
+      "ratingValue": "{{ reviews|average_rating }}",
+      "reviewCount": "{{ reviews_count }}"
     },
     "review": [
       {% get_reviews as reviews %}
@@ -34,6 +37,7 @@
     ]
   }
 </script>
+{% endwith %}
 
 <div class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
   <div class="max-w-7xl mx-auto">
@@ -58,7 +62,6 @@
     <!-- Контейнер с горизонтальной прокруткой -->
     <div class="reviews-scroll-container">
       <div class="reviews-scroll-content">
-        {% load review_tags %}
         <div class="reviews-scroll-content">
           {% get_reviews as reviews %} {% for review in reviews %}
           <div class="reviews-scroll-item">
