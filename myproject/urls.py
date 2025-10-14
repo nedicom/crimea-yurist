@@ -10,8 +10,10 @@ from django.contrib.sitemaps.views import sitemap
 from wagtail.contrib.sitemaps import Sitemap
 from search import views as search_views
 
+wagtail_sitemap = Sitemap()
+
 sitemaps = {
-    'pages': Sitemap(),  # Обратите внимание на скобки!
+    'pages': wagtail_sitemap,
 }
 
 urlpatterns = [
