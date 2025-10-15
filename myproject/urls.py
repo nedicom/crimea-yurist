@@ -6,16 +6,22 @@ from django.views.generic.base import TemplateView
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
-from wagtail.contrib.sitemaps.views import sitemap
-
-
+from django.contrib.sitemaps.views import sitemap
+from wagtail.contrib.sitemaps import Sitemap
 from search import views as search_views
+
+wagtail_sitemap = Sitemap()
+
+sitemaps = {
+    'pages': wagtail_sitemap,
+}
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
     path("", include(wagtail_urls)),
 
         # Robots.txt
@@ -23,9 +29,6 @@ urlpatterns = [
         template_name='robots.txt',
         content_type='text/plain'
     )),
-    
-        # Sitemap
-    path('sitemap.xml', sitemap),
 ]
 
 
