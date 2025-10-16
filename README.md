@@ -29,5 +29,4 @@ move tailwindcss-windows-x64.exe tailwindcss.exe
 # windows
 .\tailwindcss.exe --input .\myproject\src\style.css --output .\myproject\static\css\output.css --watch --content "./myproject/templates/**/*.html"
 
-The best law site ever
-http://crimea-yurist.ru
+The best law site ever - https://crimea-yurist.ru
