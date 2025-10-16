@@ -9,13 +9,13 @@ from wagtail.documents import urls as wagtaildocs_urls
 from django.contrib.sitemaps.views import sitemap
 from wagtail.contrib.sitemaps import Sitemap
 from search import views as search_views
-from .sitemaps import FixedSitemap
+from .sitemaps import CustomSitemap
 
 wagtail_sitemap = Sitemap()
 
 
 sitemaps = {
-    'pages': FixedSitemap(),
+    'pages': CustomSitemap(),
 }
 
 
@@ -24,7 +24,7 @@ urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
-    path('sitemap.xml', sitemap, {'sitemaps': {'pages': FixedSitemap}}),
+    path('sitemap.xml', sitemap, {'sitemaps': {'pages': CustomSitemap}}),
     path("", include(wagtail_urls)),
 
         # Robots.txt
