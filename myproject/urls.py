@@ -10,6 +10,7 @@ from django.contrib.sitemaps.views import sitemap
 from wagtail.contrib.sitemaps import Sitemap
 from search import views as search_views
 from .sitemaps import CustomSitemap
+from . import views
 
 wagtail_sitemap = Sitemap()
 
@@ -25,6 +26,8 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path('sitemap.xml', sitemap, {'sitemaps': {'pages': CustomSitemap}}),
+    path('preview/404/', views.preview_404, name='preview_404'),
+    path('preview/500/', views.preview_500, name='preview_500'),
     path("", include(wagtail_urls)),
 
         # Robots.txt
