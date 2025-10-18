@@ -1,11 +1,111 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="ru">
+{% include "includes/head.html" %}
+<body class="font-sans antialiased">
+    <!-- Header -->
+    {# Header #}
+    {% include "includes/navigation.html" %}
 
-{% block title %}Page not found{% endblock %}
+    <!-- Main Content -->
+    <main>
+        <section class="gradient-bg min-h-screen flex items-center justify-center py-12">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <!-- Анимированное число 404 -->
+                    <div class="mb-8">
+                        <h1 class="text-9xl font-bold text-white opacity-90 mb-4">
+                            4<span class="text-yellow-300">0</span>4
+                        </h1>
+                        <div class="w-24 h-2 bg-yellow-300 mx-auto rounded-full"></div>
+                    </div>
 
-{% block body_class %}template-404{% endblock %}
+                    <!-- Заголовок и описание -->
+                    <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12 hover-lift">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                            Страница не найдена
+                        </h2>
+                        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                            К сожалению, запрашиваемая вами страница не существует или была перемещена. 
+                            Возможно, вы ошиблись при вводе адреса или страница была удалена.
+                        </p>
 
-{% block content %}
-<h1>Page not found</h1>
+                        <!-- Действия -->
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                            <a href="/" 
+                               class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300 transform hover:scale-105">
+                                ← Вернуться на главную
+                            </a>
+                            <a href="https://crimea-yurist.ru" 
+                               class="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300">
+                                Связаться с нами
+                            </a>
+                        </div>
 
-<h2>Sorry, this page could not be found.</h2>
-{% endblock %}
+                        <!-- Полезные ссылки -->
+                        <div class="border-t pt-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Популярные страницы:</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                                <a href="https://crimea-yurist.ru" 
+                                   class="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors border-l-4 border-blue-500">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Юридические консультации</h4>
+                                    <p class="text-sm text-gray-600">Профессиональные консультации по правовым вопросам</p>
+                                </a>
+                                <a href="https://crimea-yurist.ru" 
+                                   class="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors border-l-4 border-green-500">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Сопровождение сделок</h4>
+                                    <p class="text-sm text-gray-600">Юридическое сопровождение сделок с недвижимостью</p>
+                                </a>
+                                <a href="https://crimea-yurist.ru" 
+                                   class="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors border-l-4 border-red-500">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Судебные споры</h4>
+                                    <p class="text-sm text-gray-600">Представительство в судах всех инстанций</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Дополнительная информация -->
+                    <div class="mt-8 text-white opacity-80">
+                        <p class="text-sm">
+                            Если вы считаете, что это ошибка, пожалуйста, 
+                            <a href="https://crimea-yurist.ru" class="underline hover:text-yellow-300 transition-colors">свяжитесь с нами</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Юрист в Крыму. Все права защищены.</p>
+            <div class="mt-4 space-x-6">
+                <a href="https://crimea-yurist.ru" class="text-gray-400 hover:text-white transition-colors">
+                    Политика конфиденциальности
+                </a>
+                <a href="https://crimea-yurist.ru" class="text-gray-400 hover:text-white transition-colors">
+                    Согласие на обработку данных
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Microdata для SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Страница не найдена - Юрист в Крыму",
+        "description": "Страница ошибки 404 - Юридические услуги в Крыму",
+        "publisher": {
+            "@type": "ProfessionalService",
+            "name": "Юрист в Крыму",
+            "description": "Юридические услуги в Крыму",
+            "areaServed": "Крым",
+            "url": "https://crimea-yurist.ru"
+        }
+    }
+    </script>
+</body>
+</html>

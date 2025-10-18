@@ -1,6 +1,20 @@
+# settings/production.py
 from .base import *
 
-DEBUG = False
+DEBUG = False  
+
+SECRET_KEY = "django-insecure-7n801@zb(oka0^12ham7cl%v_1#7hyp6%kkfek$-alq$@8r&ig"
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'crimea-yurist.ru',
+    'www.crimea-yurist.ru',
+]
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 try:
     from .local import *

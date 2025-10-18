@@ -1,13 +1,120 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8" />
-        <title>Internal server error</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </head>
-    <body>
-        <h1>Internal server error</h1>
+<html lang="ru">
+{% include "includes/head.html" %}
+<body class="font-sans antialiased">
+    <!-- Header -->
+    {# Header #}
+    {% include "includes/navigation.html" %}
 
-        <h2>Sorry, there seems to be an error. Please try again soon.</h2>
-    </body>
+    <!-- Main Content -->
+    <main>
+        <section class="gradient-bg min-h-screen flex items-center justify-center py-12">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <!-- Анимированное число 500 -->
+                    <div class="mb-8">
+                        <h1 class="text-9xl font-bold text-white opacity-90 mb-4">
+                            5<span class="text-red-400">0</span>0
+                        </h1>
+                        <div class="w-24 h-2 bg-red-400 mx-auto rounded-full"></div>
+                    </div>
+
+                    <!-- Заголовок и описание -->
+                    <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12 hover-lift">
+                        <div class="text-red-500 text-6xl mb-6">🚧</div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                            Временные технические работы
+                        </h2>
+                        <p class="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
+                            На нашем сайте ведутся технические работы. Приносим извинения за временные неудобства.
+                        </p>
+                        <p class="text-md text-gray-500 mb-8 max-w-2xl mx-auto">
+                            Наша команда уже работает над устранением проблемы. Пожалуйста, попробуйте обновить страницу через несколько минут.
+                        </p>
+
+                        <!-- Действия -->
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                            <a href="/" 
+                               class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300 transform hover:scale-105">
+                                ← Вернуться на главную
+                            </a>
+                            <button onclick="location.reload()" 
+                                    class="border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300">
+                                🔄 Обновить страницу
+                            </button>
+                        </div>
+
+                        <!-- Статус работ -->
+                        <div class="mt-8 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                            <div class="flex items-center justify-center mb-2">
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse mr-2"></div>
+                                <span class="text-yellow-800 font-semibold">Ведутся технические работы</span>
+                            </div>
+                            <p class="text-sm text-yellow-700">
+                                Ожидаемое время восстановления: <span class="font-semibold">15-30 минут</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Дополнительная информация -->
+                    <div class="mt-8 text-white opacity-80">
+                        <p class="text-sm">
+                            Если проблема сохраняется длительное время, 
+                            <a href="mailto:info@crimea-yurist.ru" class="underline hover:text-yellow-300 transition-colors">
+                                напишите нам на почту
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Юрист в Крыму. Все права защищены.</p>
+            <div class="mt-4 space-x-6">
+                <a href="https://crimea-yurist.ru" class="text-gray-400 hover:text-white transition-colors">
+                    Политика конфиденциальности
+                </a>
+                <a href="https://crimea-yurist.ru" class="text-gray-400 hover:text-white transition-colors">
+                    Согласие на обработку данных
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Microdata для SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Ошибка сервера - Юрист в Крыму",
+        "description": "Временные технические работы на сайте - Юридические услуги в Крыму",
+        "publisher": {
+            "@type": "ProfessionalService",
+            "name": "Юрист в Крыму",
+            "description": "Юридические услуги в Крыму",
+            "areaServed": "Крым",
+            "url": "https://crimea-yurist.ru",
+            "telephone": "+79780000000",
+            "email": "info@crimea-yurist.ru"
+        }
+    }
+    </script>
+
+    <!-- Авто-обновление через 2 минуты -->
+    <script>
+        setTimeout(function() {
+            const refreshBtn = document.createElement('button');
+            refreshBtn.className = 'fixed bottom-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-700 transition-colors z-50';
+            refreshBtn.innerHTML = '🔄 Страница обновлена! Нажмите для загрузки';
+            refreshBtn.onclick = function() {
+                location.reload();
+            };
+            document.body.appendChild(refreshBtn);
+        }, 120000); // 2 минуты
+    </script>
+</body>
 </html>
