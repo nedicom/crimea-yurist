@@ -16,6 +16,12 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
+# Безопасность для production
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
 try:
     from .local import *
 except ImportError:
