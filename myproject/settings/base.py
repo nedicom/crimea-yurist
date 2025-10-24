@@ -84,6 +84,8 @@ TEMPLATES = [
     },
 ]
 
+WAGTAIL_404_TEMPLATE = '404.html'
+
 WSGI_APPLICATION = "myproject.wsgi.application"
 
 # settings.py
