@@ -3,6 +3,10 @@ myenv/
 venv/
 env/
 
+# static
+media/
+static/
+
 # Database
 db.sqlite3
 *.db
