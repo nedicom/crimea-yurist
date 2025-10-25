@@ -1,9 +1,12 @@
 # settings/production.py
 from .base import *
+from dotenv import load_dotenv
 
 DEBUG = False  
 
-SECRET_KEY = "django-insecure-7n801@zb(oka0^12ham7cl%v_1#7hyp6%kkfek$-alq$@8r&ig"
+load_dotenv()
+
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = [
     'localhost',
