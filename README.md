@@ -10,6 +10,7 @@ Python 3.7.0 + front (html, js, css)
 5. install framework and CMS: 
 - pip install django==3.2.25 
 - pip install wagtail==4.1.4
+- pip install python-dotenv (.envexample = .env)
 6. python manage.py runserver
 
 options:
