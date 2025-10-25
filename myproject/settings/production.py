@@ -14,8 +14,6 @@ ALLOWED_HOSTS = [
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-
 # Безопасность для production
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
