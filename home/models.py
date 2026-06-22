@@ -185,6 +185,8 @@ class CityPage(Page):
         context = super().get_context(request)
         # Добавляем услуги этого города в контекст
         context['services'] = ServicePage.objects.child_of(self).live()
+        # Перелинковка: другие города Крыма
+        context['other_cities'] = CityPage.objects.live().public().exclude(id=self.id)
         return context
 
     def get_schema_org_data(self):
@@ -293,7 +295,13 @@ class ServicePage(Page):
     def get_context(self, request):
         context = super().get_context(request)
         # Добавляем родительский город в контекст
-        context['city'] = self.get_parent().specific
+        city_page = self.get_parent().specific
+        context['city'] = city_page
+        # Перелинковка: другие услуги в этом же городе + другие города
+        context['sibling_services'] = (
+            ServicePage.objects.child_of(city_page).live().public().exclude(id=self.id)
+        )
+        context['other_cities'] = CityPage.objects.live().public().exclude(id=city_page.id)
         return context
 
     def get_schema_org_data(self):

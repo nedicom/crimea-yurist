@@ -1,0 +1,88 @@
+{% load static wagtailcore_tags custom_menu %}
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="https://crimea-yurist.ru{% static 'favicon.ico' %}">
+    <title>Карта сайта — все услуги юриста по городам Крыма | Крым-Юрист</title>
+    <meta name="description" content="Карта сайта crimea-yurist.ru: юридические услуги во всех городах Крыма — Симферополь, Севастополь, Ялта, Евпатория, Феодосия, Керчь, Саки. Полный список услуг и разделов." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href="https://crimea-yurist.ru/karta-sayta/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="Крым-Юрист" />
+    <meta property="og:title" content="Карта сайта — все услуги юриста по городам Крыма" />
+    <meta property="og:url" content="https://crimea-yurist.ru/karta-sayta/" />
+    <meta property="og:image" content="https://crimea-yurist.ru{% static 'images/logo.jpg' %}" />
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+</head>
+<body>
+    {# Header #}
+    {% include "includes/navigation.html" %}
+
+    <main class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 min-h-screen">
+        <div class="max-w-7xl mx-auto">
+            <nav class="text-sm text-gray-500 mb-6">
+                <a href="/" class="hover:text-blue-600">Главная</a> / <span>Карта сайта</span>
+            </nav>
+
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Карта сайта
+            </h1>
+            <p class="text-lg text-gray-600 mb-12 max-w-3xl">
+                Все услуги юриста по городам Крыма и основные разделы сайта.
+            </p>
+
+            {% if home %}
+            <div class="mb-10">
+                <a href="{{ home.url }}" class="text-lg font-bold text-blue-600 hover:underline">
+                    <i class="fas fa-home mr-2"></i>{{ home.title }}
+                </a>
+            </div>
+            {% endif %}
+
+            {# Города и услуги #}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for item in cities %}
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <a href="{{ item.city.url }}"
+                       class="block text-xl font-bold text-gray-900 hover:text-blue-600 mb-4 pb-3 border-b border-gray-100">
+                        <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>{{ item.city.title }}
+                    </a>
+                    <ul class="space-y-2">
+                        {% for s in item.services %}
+                        <li>
+                            <a href="{{ s.url }}"
+                               class="flex items-center gap-2 text-gray-700 hover:text-blue-600 text-sm">
+                                <i class="fas fa-scale-balanced text-blue-400 text-xs"></i>
+                                <span>{{ s.title }}</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+
+            {# Прочие разделы #}
+            {% if other_sections %}
+            <div class="mt-12 bg-white rounded-2xl shadow-sm p-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">Разделы сайта</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {% for p in other_sections %}
+                    <a href="{{ p.url }}"
+                       class="flex items-center gap-2 p-3 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-blue-50 border border-gray-100 hover:border-blue-200 transition-colors">
+                        <i class="fas fa-folder text-blue-400 text-sm"></i>
+                        <span>{{ p.title }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    {# Footer #}
+    {% include "includes/footer.html" %}
+</body>
+</html>

@@ -311,6 +311,7 @@ def make_service_payload(service, city):
         "price_description": service["price_desc"],
         "city": city["name"],
         "region": city["region"],
+        "show_in_menus": True,
     }
 
 
@@ -355,6 +356,7 @@ def make_city_payload(city):
         "content": content,
         "city": name,
         "region": city["region"],
+        "show_in_menus": True,
     }
 
 

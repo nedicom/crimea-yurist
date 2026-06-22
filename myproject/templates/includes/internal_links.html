@@ -1,0 +1,64 @@
+{% comment %}
+Блок внутренней перелинковки. Использует переменные контекста:
+- services         (на странице города)   — услуги этого города
+- sibling_services (на странице услуги)   — другие услуги этого города
+- other_cities     (город/услуга)         — другие города Крыма
+{% endcomment %}
+{% if services or sibling_services or other_cities %}
+<div class="py-14 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100">
+  <div class="max-w-7xl mx-auto space-y-12">
+
+    {% if services %}
+    <div>
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+        Услуги юриста в этом городе
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {% for s in services %}
+        <a href="{{ s.url }}"
+           class="flex items-center gap-2 p-3 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-blue-50 border border-gray-100 hover:border-blue-200 transition-colors">
+          <i class="fas fa-scale-balanced text-blue-500 text-sm"></i>
+          <span>{{ s.title }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if sibling_services %}
+    <div>
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+        Другие услуги юриста в этом городе
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {% for s in sibling_services %}
+        <a href="{{ s.url }}"
+           class="flex items-center gap-2 p-3 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-blue-50 border border-gray-100 hover:border-blue-200 transition-colors">
+          <i class="fas fa-scale-balanced text-blue-500 text-sm"></i>
+          <span>{{ s.title }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if other_cities %}
+    <div>
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+        Юрист в других городах Крыма
+      </h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        {% for c in other_cities %}
+        <a href="{{ c.url }}"
+           class="flex items-center gap-2 p-3 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-blue-50 border border-gray-100 hover:border-blue-200 transition-colors">
+          <i class="fas fa-map-marker-alt text-blue-500 text-sm"></i>
+          <span>{{ c.title }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endif %}

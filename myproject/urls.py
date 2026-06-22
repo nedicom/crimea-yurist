@@ -14,7 +14,7 @@ from wagtail.contrib.sitemaps import Sitemap
 
 from search import views as search_views
 from .sitemaps import CustomSitemap
-from .views import custom_404, custom_500
+from .views import custom_404, custom_500, sitemap_html
 
 wagtail_sitemap = Sitemap()
 
@@ -33,6 +33,9 @@ urlpatterns = [
 
     # sitemap.xml
     path('sitemap.xml', sitemap, {'sitemaps': {'pages': CustomSitemap}}),
+
+    # HTML-карта сайта для людей
+    path('karta-sayta/', sitemap_html, name='sitemap_html'),
 
     # Robots.txt
     path('robots.txt', TemplateView.as_view(
