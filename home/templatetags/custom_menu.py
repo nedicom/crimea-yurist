@@ -5,7 +5,10 @@ from wagtail.models import Page
 register = template.Library()
 
 @register.inclusion_tag('tags/custom_menu.html', takes_context=True)
-def show_nested_menu(context, show_children=True):
+def show_nested_menu(context, show_children=False):
+    # show_children=False по умолчанию: в нижнем меню только города (хабы),
+    # чтобы не плодить ~98 сквозных ссылок. Услуги — на странице города,
+    # в блоке перелинковки и на /karta-sayta/.
     parent_pages = Page.objects.filter(depth=3).live().public().in_menu()
     
     # Добавляем дочерние страницы для каждого родителя
