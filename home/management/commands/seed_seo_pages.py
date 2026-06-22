@@ -14,6 +14,7 @@
 """
 
 from django.core.management.base import BaseCommand
+from wagtail.rich_text import RichText
 
 
 # --- ГОРОДА -----------------------------------------------------------------
@@ -263,7 +264,8 @@ REGION_DEFAULT = "Республика Крым"
 
 
 def build_paragraph(html):
-    return ("paragraph", html)
+    # RichTextBlock требует объект RichText, а не строку (иначе падает get_prep_value).
+    return ("paragraph", RichText(html))
 
 
 def make_service_payload(service, city):
