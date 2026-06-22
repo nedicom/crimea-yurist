@@ -14,7 +14,7 @@
     <link rel="manifest" href="https://crimea-yurist.ru{% static 'site.webmanifest' %}">
     <title>
         {% block title %}
-        {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %} | {{ current_site.site_name }}
+        {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %} | Крым-Юрист
         {% endblock %}
         {% block title_suffix %}
         {% wagtail_site as current_site %}
@@ -27,6 +27,32 @@
         content="Юридическая компания в Крыму с 2014 года. Услуги адвоката по гражданским, арбитражным и уголовным делам. Бесплатная консультация юриста в Симферополе, Севастополе, Ялте и других городах Крыма." />
     {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {# Canonical — защита от дублей и параметров в URL #}
+    {% if page %}
+    <link rel="canonical" href="https://crimea-yurist.ru{{ page.url }}" />
+    {% endif %}
+
+    {# Open Graph / Twitter — красивые сниппеты при репостах #}
+    {% firstof page.seo_title page.title current_site.site_name as og_title %}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="Крым-Юрист" />
+    <meta property="og:title" content="{{ og_title }}" />
+    <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}Юридическая компания в Крыму с 2014 года. Услуги адвоката по гражданским, арбитражным и уголовным делам. Бесплатная консультация юриста в Симферополе, Севастополе, Ялте.{% endif %}" />
+    {% if page %}<meta property="og:url" content="https://crimea-yurist.ru{{ page.url }}" />{% endif %}
+    {% if page.hero_image %}
+        {% image page.hero_image fill-1200x630 as og_image %}
+        <meta property="og:image" content="https://crimea-yurist.ru{{ og_image.url }}" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+    {% else %}
+        <meta property="og:image" content="https://crimea-yurist.ru{% static 'images/logo.jpg' %}" />
+    {% endif %}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ og_title }}" />
+    <meta name="twitter:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}Юридическая компания в Крыму. Бесплатная консультация юриста.{% endif %}" />
+    {% if page.hero_image %}<meta name="twitter:image" content="https://crimea-yurist.ru{{ og_image.url }}" />{% else %}<meta name="twitter:image" content="https://crimea-yurist.ru{% static 'images/logo.jpg' %}" />{% endif %}
 
     <meta name="google-site-verification" content="Bkg7IGFvTg3L9JluKNqMzMYxQHGD0ZvGpWa8lWwFD8M" />
     <meta name="yandex-verification" content="9be87a59ac80f1f9" />
