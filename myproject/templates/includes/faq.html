@@ -1,0 +1,60 @@
+{% comment %}
+FAQ-блок: видимые вопросы-ответы + FAQPage JSON-LD (контент совпадает — по правилам Google).
+Использует поля страницы: page.title, page.price, page.price_description, page.city.
+{% endcomment %}
+<div class="py-14 px-4 sm:px-6 lg:px-8 bg-gray-50" id="faq">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
+      Частые вопросы
+    </h2>
+    <div class="space-y-4">
+      {% if page.price %}
+      <details class="bg-white rounded-xl p-5 shadow-sm">
+        <summary class="font-semibold text-gray-900 cursor-pointer">Сколько стоит {{ page.title }}?</summary>
+        <p class="mt-3 text-gray-700">Стоимость — {{ page.price_description|default:'от' }} {{ page.price|floatformat:0 }} ₽. Первая консультация бесплатна: оценим перспективы дела и предложим решение.</p>
+      </details>
+      {% endif %}
+      <details class="bg-white rounded-xl p-5 shadow-sm">
+        <summary class="font-semibold text-gray-900 cursor-pointer">Как получить консультацию юриста?</summary>
+        <p class="mt-3 text-gray-700">Позвоните по телефону +7 978 910-42-97 или оставьте заявку на сайте — юрист перезвонит, бесплатно оценит ситуацию и предложит решение.</p>
+      </details>
+      <details class="bg-white rounded-xl p-5 shadow-sm">
+        <summary class="font-semibold text-gray-900 cursor-pointer">Вы работаете {% if page.city %}в {{ page.city }}{% else %}по всему Крыму{% endif %}?</summary>
+        <p class="mt-3 text-gray-700">Да. Мы оказываем юридические услуги {% if page.city %}в {{ page.city }} и {% endif %}по всему Крыму с 2014 года, включая Симферополь, Севастополь и Ялту.</p>
+      </details>
+      <details class="bg-white rounded-xl p-5 shadow-sm">
+        <summary class="font-semibold text-gray-900 cursor-pointer">Первая консультация бесплатная?</summary>
+        <p class="mt-3 text-gray-700">Да, первичная консультация бесплатна. По многим делам возможна оплата услуг по результату.</p>
+      </details>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% if page.price %}{
+      "@type": "Question",
+      "name": "Сколько стоит {{ page.title }}?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Стоимость — {{ page.price_description|default:'от' }} {{ page.price|floatformat:0 }} ₽. Первая консультация бесплатна." }
+    },{% endif %}
+    {
+      "@type": "Question",
+      "name": "Как получить консультацию юриста?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Позвоните по телефону +7 978 910-42-97 или оставьте заявку на сайте — юрист перезвонит и бесплатно оценит ситуацию." }
+    },
+    {
+      "@type": "Question",
+      "name": "Вы работаете {% if page.city %}в {{ page.city }}{% else %}по всему Крыму{% endif %}?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Да, мы оказываем юридические услуги {% if page.city %}в {{ page.city }} и {% endif %}по всему Крыму с 2014 года." }
+    },
+    {
+      "@type": "Question",
+      "name": "Первая консультация бесплатная?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Да, первичная консультация бесплатна. По многим делам возможна оплата услуг по результату." }
+    }
+  ]
+}
+</script>

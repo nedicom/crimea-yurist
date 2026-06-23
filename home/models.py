@@ -83,26 +83,6 @@ class HomePage(Page):
         context['cities'] = CityPage.objects.live().public()
         return context
 
-    def get_schema_org_data(self):
-        """Генерация данных для Schema.org для главной страницы"""
-        return {
-            "@context": "https://schema.org",
-            "@type": "LegalService",
-            "name": self.hero_title or self.title,
-            "description": self.description,
-            "telephone": self.phone,
-            "email": self.email,
-            "url": self.full_url,
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": self.street_address,
-                "addressLocality": self.city,
-                "addressRegion": self.region,
-                "postalCode": self.postal_code,
-            },
-            "hasMap": self.map_url if self.map_url else None
-        }
-
     class Meta:
         verbose_name = "Главная страница"
         verbose_name_plural = "Главные страницы"
@@ -188,26 +168,6 @@ class CityPage(Page):
         # Перелинковка: другие города Крыма
         context['other_cities'] = CityPage.objects.live().public().exclude(id=self.id)
         return context
-
-    def get_schema_org_data(self):
-        """Генерация данных для Schema.org"""
-        return {
-            "@context": "https://schema.org",
-            "@type": "LegalService",
-            "name": self.city_name or self.title,
-            "description": self.description,
-            "telephone": self.phone,
-            "email": self.email,
-            "url": self.full_url,
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": self.street_address,
-                "addressLocality": self.city,
-                "addressRegion": self.region,
-                "postalCode": self.postal_code,
-            },
-            "hasMap": self.map_url if self.map_url else None
-        }
 
     class Meta:
         verbose_name = "Страница города"
@@ -303,69 +263,6 @@ class ServicePage(Page):
         )
         context['other_cities'] = CityPage.objects.live().public().exclude(id=city_page.id)
         return context
-
-    def get_schema_org_data(self):
-        """Генерация данных для Schema.org для услуги"""
-        city_page = self.get_parent().specific
-        
-        schema_data = {
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": self.title,
-            "description": self.description,
-        }
-        
-        # Добавляем цену, если указана
-        if self.price:
-            schema_data["offers"] = {
-                "@type": "Offer",
-                "price": str(self.price),
-                "priceCurrency": "RUB",
-                "description": self.price_description
-            }
-        elif self.price_description:
-            schema_data["offers"] = {
-                "@type": "Offer",
-                "priceSpecification": {
-                    "@type": "PriceSpecification",
-                    "description": self.price_description
-                }
-            }
-        
-        # Добавляем адрес, если указан
-        if any([self.street_address, self.city, self.region]):
-            schema_data["areaServed"] = {
-                "@type": "Place",
-                "name": f"{self.city}, {self.region}" if self.city and self.region else self.city or self.region
-            }
-            
-            if any([self.street_address, self.city, self.region, self.postal_code]):
-                schema_data["areaServed"]["address"] = {
-                    "@type": "PostalAddress",
-                    "streetAddress": self.street_address,
-                    "addressLocality": self.city,
-                    "addressRegion": self.region,
-                    "postalCode": self.postal_code,
-                }
-        
-        # Добавляем контакты
-        if self.phone:
-            schema_data["telephone"] = self.phone
-        if self.email:
-            schema_data["email"] = self.email
-        
-        # Добавляем ссылку на карту
-        if self.map_url:
-            schema_data["hasMap"] = self.map_url
-        
-        # Добавляем информацию о провайдере услуги (город)
-        schema_data["provider"] = {
-            "@type": "LegalService",
-            "name": city_page.city_name,
-            "url": city_page.full_url
-        }
-        
-        return schema_data
 
     class Meta:
         verbose_name = "Страница услуги"
