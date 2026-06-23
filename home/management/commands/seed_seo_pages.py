@@ -43,6 +43,19 @@ CITIES = [
     {"name": "Саки", "slug": "yurist-v-sakah", "prep": "в Саках",
      "frag": "v-sakah", "region": "Республика Крым", "is_new": True,
      "court": "Сакский районный суд"},
+
+    {"name": "Бахчисарай", "slug": "yurist-v-bahchisarae", "prep": "в Бахчисарае",
+     "frag": "v-bahchisarae", "region": "Республика Крым", "is_new": True,
+     "court": "Бахчисарайский районный суд"},
+    {"name": "Алушта", "slug": "yurist-v-alushte", "prep": "в Алуште",
+     "frag": "v-alushte", "region": "Республика Крым", "is_new": True,
+     "court": "Алуштинский городской суд"},
+    {"name": "Судак", "slug": "yurist-v-sudake", "prep": "в Судаке",
+     "frag": "v-sudake", "region": "Республика Крым", "is_new": True,
+     "court": "Судакский городской суд"},
+    {"name": "Джанкой", "slug": "yurist-v-dzhankoe", "prep": "в Джанкое",
+     "frag": "v-dzhankoe", "region": "Республика Крым", "is_new": True,
+     "court": "Джанкойский районный суд"},
 ]
 
 # --- УСЛУГИ ------------------------------------------------------------------
