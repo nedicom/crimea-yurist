@@ -261,7 +261,22 @@ class ServicePage(Page):
         context['sibling_services'] = (
             ServicePage.objects.child_of(city_page).live().public().exclude(id=self.id)
         )
-        context['other_cities'] = CityPage.objects.live().public().exclude(id=city_page.id)
+        other_cities = CityPage.objects.live().public().exclude(id=city_page.id)
+        context['other_cities'] = other_cities
+
+        # Та же услуга в других городах: вычисляем базовый slug услуги (без суффикса города)
+        # и одним запросом находим страницы-аналоги в остальных городах.
+        city_suffix = city_page.slug.replace('yurist-', '', 1)  # напр. 'v-simferopole'
+        base = self.slug
+        if city_suffix and self.slug.endswith('-' + city_suffix):
+            base = self.slug[: -(len(city_suffix) + 1)]
+        candidate_slugs = [
+            '{}-{}'.format(base, oc.slug.replace('yurist-', '', 1)) for oc in other_cities
+        ]
+        context['same_service_other_cities'] = (
+            ServicePage.objects.live().public()
+            .filter(slug__in=candidate_slugs).exclude(id=self.id)
+        )
         return context
 
     class Meta:

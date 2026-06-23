@@ -42,6 +42,23 @@
     </div>
     {% endif %}
 
+    {% if same_service_other_cities %}
+    <div>
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+        Эта услуга в других городах Крыма
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {% for s in same_service_other_cities %}
+        <a href="{{ s.url }}"
+           class="flex items-center gap-2 p-3 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-blue-50 border border-gray-100 hover:border-blue-200 transition-colors">
+          <i class="fas fa-map-marker-alt text-blue-500 text-sm"></i>
+          <span>{{ s.title }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
     {% if other_cities %}
     <div>
       <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
