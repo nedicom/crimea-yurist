@@ -56,6 +56,25 @@ CITIES = [
     {"name": "Джанкой", "slug": "yurist-v-dzhankoe", "prep": "в Джанкое",
      "frag": "v-dzhankoe", "region": "Республика Крым", "is_new": True,
      "court": "Джанкойский районный суд"},
+
+    {"name": "Армянск", "slug": "yurist-v-armjanske", "prep": "в Армянске",
+     "frag": "v-armjanske", "region": "Республика Крым", "is_new": True,
+     "court": "Армянский городской суд"},
+    {"name": "Белогорск", "slug": "yurist-v-belogorske", "prep": "в Белогорске",
+     "frag": "v-belogorske", "region": "Республика Крым", "is_new": True,
+     "court": "Белогорский районный суд"},
+    {"name": "Алупка", "slug": "yurist-v-alupke", "prep": "в Алупке",
+     "frag": "v-alupke", "region": "Республика Крым", "is_new": True,
+     "court": "Ялтинский городской суд"},
+    {"name": "Гурзуф", "slug": "yurist-v-gurzufe", "prep": "в Гурзуфе",
+     "frag": "v-gurzufe", "region": "Республика Крым", "is_new": True,
+     "court": "Ялтинский городской суд"},
+    {"name": "Красноперекопск", "slug": "yurist-v-krasnoperekopske", "prep": "в Красноперекопске",
+     "frag": "v-krasnoperekopske", "region": "Республика Крым", "is_new": True,
+     "court": "Красноперекопский районный суд"},
+    {"name": "Щёлкино", "slug": "yurist-v-shhelkino", "prep": "в Щёлкино",
+     "frag": "v-shhelkino", "region": "Республика Крым", "is_new": True,
+     "court": "Ленинский районный суд"},
 ]
 
 # --- УСЛУГИ ------------------------------------------------------------------
